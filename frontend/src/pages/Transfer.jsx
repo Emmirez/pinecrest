@@ -181,7 +181,7 @@ const Transfer = () => {
             Transfers
           </h1>
           <p className="text-sm text-slate-600 mt-0.5">
-            Send money within Well Trust Bank, domestically, or internationally.
+            Send money within Pinecrest Bank, domestically, or internationally.
           </p>
         </div>
 

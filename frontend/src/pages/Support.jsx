@@ -71,7 +71,7 @@ const faqs = [
   {
     icon: PlusCircle,
     q: "How to add funds to my account?",
-    a: "You can add funds to your Well Trust Bank account through multiple channels. Internal transfers between Well Trust accounts are instant. External transfers via ACH typically take 1-3 business days to process. You can also receive funds from approved Loans, Grants, or Tax Refund claims — all available in your dashboard menu.",
+    a: "You can add funds to your Pinecrest Bank account through multiple channels. Internal transfers between Well Trust accounts are instant. External transfers via ACH typically take 1-3 business days to process. You can also receive funds from approved Loans, Grants, or Tax Refund claims — all available in your dashboard menu.",
   },
   {
     icon: TrendingUp,

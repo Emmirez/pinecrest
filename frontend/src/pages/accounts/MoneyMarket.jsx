@@ -55,7 +55,7 @@ const features = [
 ];
 
 const requirements = [
-  "An existing or new Well Trust Bank account in good standing",
+  "An existing or new Pinecrest Bank account in good standing",
   "A valid government-issued ID",
   "Your Social Security Number",
   "A 4-digit transaction PIN, set at signup",
@@ -88,7 +88,7 @@ const MoneyMarket = () => (
       <div className="rounded-xl3 overflow-hidden shadow-card h-[280px] md:h-[360px]">
         <img
           src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1200&auto=format&fit=crop"
-          alt="Well Trust Bank money market account"
+          alt="Pinecrest Bank money market account"
           className="w-full h-full object-cover"
         />
       </div>

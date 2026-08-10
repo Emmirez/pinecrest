@@ -67,7 +67,7 @@ const Login = () => {
           <div className="text-center mb-8">
             <img
               src="/logo.png"
-              alt="Well Trust Bank"
+              alt="Pinecrest Bank"
               className="h-12 mx-auto mb-4"
               onError={(e) => (e.target.style.display = "none")}
             />
@@ -77,7 +77,7 @@ const Login = () => {
             <p className="text-slate-400 text-sm mt-1">
               {twoFactorUserId
                 ? "Open your authenticator app to get your code"
-                : "Log in to your Well Trust Bank account"}
+                : "Log in to your Pinecrest Bank account"}
             </p>
           </div>
 

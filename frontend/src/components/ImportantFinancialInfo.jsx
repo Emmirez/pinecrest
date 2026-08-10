@@ -11,7 +11,7 @@ const documents = [
   {
     icon: FileText,
     title: "Online Banking Service Agreement",
-    desc: "The terms that govern your use of Well Trust Bank's online and mobile banking services.",
+    desc: "The terms that govern your use of Pinecrest Bank's online and mobile banking services.",
     hasLink: true,
   },
   {

@@ -3,7 +3,8 @@ import { Download, X, Share, SquarePlus } from "lucide-react";
 
 const isIos = () => /iphone|ipad|ipod/i.test(window.navigator.userAgent);
 const isInStandaloneMode = () =>
-  window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  window.matchMedia("(display-mode: standalone)").matches ||
+  window.navigator.standalone === true;
 
 const InstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -52,17 +53,27 @@ const InstallPrompt = () => {
       <div className="bg-white rounded-2xl shadow-2xl border border-slate-100 p-4">
         <div className="flex items-start gap-3">
           <div className="h-11 w-11 rounded-2xl bg-navy flex items-center justify-center shrink-0 overflow-hidden">
-            <img src="/logo.png" alt="Well Trust Bank" className="h-full w-full object-cover" onError={(e) => (e.target.style.display = "none")} />
+            <img
+              src="/logo.png"
+              alt="Pinecrest Bank"
+              className="h-full w-full object-cover"
+              onError={(e) => (e.target.style.display = "none")}
+            />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-navy-900 text-sm">Install Well Trust Bank</p>
+            <p className="font-semibold text-navy-900 text-sm">
+              Install Pinecrest Bank
+            </p>
             <p className="text-xs text-slate-400 mt-0.5">
               {showIosInstructions
                 ? "Add to your home screen for quick, one-tap access anytime"
                 : "Install for faster access, offline support, and a full-screen experience"}
             </p>
           </div>
-          <button onClick={dismiss} className="text-slate-400 hover:text-navy transition shrink-0">
+          <button
+            onClick={dismiss}
+            className="text-slate-400 hover:text-navy transition shrink-0"
+          >
             <X size={18} />
           </button>
         </div>
@@ -70,12 +81,19 @@ const InstallPrompt = () => {
         {showIosInstructions ? (
           <div className="mt-3 bg-slate-50 rounded-xl p-3 space-y-2">
             <p className="text-xs text-slate-600 flex items-center gap-2">
-              <span className="h-5 w-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0">1</span>
-              Tap the <Share size={14} className="inline text-navy" /> Share icon in Safari's toolbar
+              <span className="h-5 w-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                1
+              </span>
+              Tap the <Share size={14} className="inline text-navy" /> Share
+              icon in Safari's toolbar
             </p>
             <p className="text-xs text-slate-600 flex items-center gap-2">
-              <span className="h-5 w-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0">2</span>
-              Scroll down and tap <SquarePlus size={14} className="inline text-navy" /> "Add to Home Screen"
+              <span className="h-5 w-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                2
+              </span>
+              Scroll down and tap{" "}
+              <SquarePlus size={14} className="inline text-navy" /> "Add to Home
+              Screen"
             </p>
           </div>
         ) : (

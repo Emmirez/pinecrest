@@ -90,7 +90,7 @@ const Business = () => (
       <div className="rounded-xl3 overflow-hidden shadow-card h-[280px] md:h-[360px]">
         <img
           src="/business1.jpg"
-          alt="Well Trust Bank business account"
+          alt="Pinecrest Bank business account"
           className="w-full h-full object-cover"
         />
       </div>
@@ -178,7 +178,7 @@ const Business = () => (
         </ul>
         <p className="text-xs text-slate-400 mt-5">
           Business applications go through the same manual review process as
-          every Well Trust Bank account — most are approved within 1-2 business
+          every Pinecrest Bank account — most are approved within 1-2 business
           days.
         </p>
       </div>

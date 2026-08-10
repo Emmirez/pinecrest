@@ -111,14 +111,14 @@ export const approveUser = async (req, res) => {
     await notifyGeneral(user, {
       title: "Account approved",
       message:
-        "Your Well Trust Bank account has been approved. You can now log in and start banking.",
+        "Your Pinecrest Bank account has been approved. You can now log in and start banking.",
       type: "account",
     });
 
     await sendEmail({
       to: user.email,
       toName: user.firstName,
-      subject: "Your Well Trust Bank account is approved",
+      subject: "Your Pinecrest Bank account is approved",
       html: approvalEmailTemplate(user.firstName, "active"),
     });
 
@@ -149,7 +149,7 @@ export const rejectUser = async (req, res) => {
     await sendEmail({
       to: user.email,
       toName: user.firstName,
-      subject: "Update on your Well Trust Bank application",
+      subject: "Update on your Pinecrest Bank application",
       html: approvalEmailTemplate(user.firstName, "rejected"),
     });
 

@@ -24,7 +24,7 @@ const categories = [
 
 const helpTopics = [
   {
-    q: "How do I open a Well Trust Bank account?",
+    q: "How do I open a Pinecrest Bank account?",
     a: "To open an account, visit our website and select 'Open an Account.' You'll need to provide personal identification, contact information, and choose your account type. The application takes approximately 5-10 minutes to complete. Once submitted, our team will verify your information and notify you of approval via email.",
   },
   {
@@ -33,7 +33,7 @@ const helpTopics = [
   },
   {
     q: "Why hasn't my transfer shown up yet?",
-    a: "Internal transfers between Well Trust Bank accounts are typically reflected immediately. External transfers to other financial institutions may take 1-3 business days, depending on the receiving bank's processing times and federal clearing schedules.",
+    a: "Internal transfers between Pinecrest Bank accounts are typically reflected immediately. External transfers to other financial institutions may take 1-3 business days, depending on the receiving bank's processing times and federal clearing schedules.",
   },
   {
     q: "How do I freeze my debit card?",
@@ -48,8 +48,8 @@ const helpTopics = [
     a: "You can customize your notification preferences by logging into your account and navigating to 'Profile' > 'Notification Settings.' From there, you can independently toggle email, SMS, and in-app alerts for transactions, balances, and security updates.",
   },
   {
-    q: "What security measures does Well Trust Bank use?",
-    a: "Well Trust Bank employs industry-leading security measures, including 256-bit SSL encryption, multi-factor authentication, and 24/7 fraud monitoring. We are FDIC insured and comply with all federal banking regulations to protect your information and deposits.",
+    q: "What security measures does Pinecrest Bank use?",
+    a: "Pinecrest Bank employs industry-leading security measures, including 256-bit SSL encryption, multi-factor authentication, and 24/7 fraud monitoring. We are FDIC insured and comply with all federal banking regulations to protect your information and deposits.",
   },
   {
     q: "How do I update my contact information?",
@@ -111,7 +111,7 @@ const Help = () => {
             </div>
           </a>
           <a
-            href="mailto:support@welltrustbank.com"
+            href="mailto:support@pinecrestbank.com"
             className="card p-4 flex items-center gap-4 hover:border-gold-300 border border-transparent transition-colors"
           >
             <div className="h-10 w-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
@@ -120,7 +120,7 @@ const Help = () => {
             <div className="text-left">
               <p className="text-sm font-semibold text-navy-900">Email Us</p>
               <p className="text-xs text-slate-400">
-                support@welltrustbank.com
+                support@pinecrestbank.com
               </p>
             </div>
           </a>
@@ -209,7 +209,7 @@ const Help = () => {
         <div className="md:col-span-2 rounded-xl overflow-hidden shadow-card h-[300px] md:h-full min-h-[360px]">
           <img
             src="/team1.jpg"
-            alt="Well Trust Bank customer support team"
+            alt="Pinecrest Bank customer support team"
             className="w-full h-full object-cover"
           />
         </div>

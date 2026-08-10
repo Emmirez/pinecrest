@@ -5,7 +5,7 @@ authenticator.options = { window: 1 }; // allow 1 step of clock drift (~30s) eit
 
 export const generateTwoFactorSecret = (email) => {
   const secret = authenticator.generateSecret();
-  const otpauth = authenticator.keyuri(email, "Well Trust Bank", secret);
+  const otpauth = authenticator.keyuri(email, "Pinecrest Bank", secret);
   return { secret, otpauth };
 };
 

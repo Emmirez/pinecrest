@@ -54,7 +54,7 @@ export const generateStatementPdf = ({
       .fillColor("#FFFFFF")
       .fontSize(20)
       .font("Helvetica-Bold")
-      .text("Well Trust Bank", 108, 32);
+      .text("Pinecrest Bank", 108, 32);
     doc
       .fillColor(GOLD_LIGHT)
       .fontSize(9)
@@ -65,7 +65,7 @@ export const generateStatementPdf = ({
       .fillColor("#FFFFFF")
       .fontSize(20)
       .font("Helvetica-Bold")
-      .text("Well Trust Bank", 50, 32);
+      .text("Pinecrest Bank", 50, 32);
     doc
       .fillColor(GOLD_LIGHT)
       .fontSize(9)
@@ -271,7 +271,7 @@ export const generateStatementPdf = ({
     .fontSize(8)
     .font("Helvetica")
     .text(
-       "Well Trust Bank, Member FDIC. Deposits insured up to $250,000 per depositor, per ownership category. This statement is provided for informational purposes only.",
+      "Pinecrest Bank, Member FDIC. Deposits insured up to $250,000 per depositor, per ownership category. This statement is provided for informational purposes only.",
       50,
       footerY,
       { width: 495, align: "center" },

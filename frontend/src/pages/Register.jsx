@@ -176,7 +176,7 @@ const Register = () => {
           <div className="text-center mb-8">
             <img
               src="/logo.png"
-              alt="Well Trust Bank"
+              alt="Pinecrest Bank"
               className="h-12 mx-auto mb-4"
               onError={(e) => (e.target.style.display = "none")}
             />

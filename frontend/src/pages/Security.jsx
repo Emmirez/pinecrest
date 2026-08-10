@@ -81,7 +81,7 @@ const Security = () => (
           <ShieldCheck size={26} />
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-navy-900 leading-tight">
-          Security at Well Trust Bank
+          Security at Pinecrest Bank
         </h1>
         <p className="text-slate-500 mt-5 text-base md:text-lg leading-relaxed">
           Your money doesn't move without your say-so. Every account, every
@@ -98,7 +98,7 @@ const Security = () => (
       <div className="rounded-xl3 overflow-hidden shadow-card h-[280px] md:h-[380px]">
         <img
           src="/security.jpg"
-          alt="Well Trust Bank security"
+          alt="Pinecrest Bank security"
           className="w-full h-full object-cover"
         />
       </div>

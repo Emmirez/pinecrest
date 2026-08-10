@@ -62,13 +62,13 @@ const Header = ({ showBackHome = false }) => {
         <a href="/" className="flex items-center gap-2.5 shrink-0">
           <img
             src="/logo.png"
-            alt="Well Trust Bank"
+            alt="Pinecrest Bank"
             className="h-10 w-auto shrink-0"
             onError={(e) => (e.target.style.display = "none")}
           />
           <span className="font-display font-bold text-lg tracking-tight leading-none whitespace-nowrap">
-            <span className="text-navy-900">Well</span>{" "}
-            <span className="text-gold-600">Trust Bank</span>
+            <span className="text-navy-900">Pinecrest</span>{" "}
+            <span className="text-gold-600">Bank</span>
           </span>
         </a>
 

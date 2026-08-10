@@ -134,7 +134,7 @@ const Landing = () => {
               <span className="text-gold-600">trust</span>.
             </h1>
             <p className="text-slate-500 mt-5 text-base md:text-lg leading-relaxed">
-              Well Trust Bank offers checking, savings, and business accounts
+              Pinecrest Bank offers checking, savings, and business accounts
               with instant internal transfers, multi-currency support, and
               real-time alerts to help you stay in control of your finances.
             </p>

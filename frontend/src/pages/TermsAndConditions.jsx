@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 const sections = [
   {
     title: "1. Acceptance of Terms",
-    body: "By enrolling in Well Trust Bank's online and mobile banking services, you agree to be bound by this Online Banking Service Agreement, along with your Deposit Account Agreement and Privacy Policy. If you do not agree, please do not enroll in or use these services.",
+    body: "By enrolling in Pinecrest Bank's online and mobile banking services, you agree to be bound by this Online Banking Service Agreement, along with your Deposit Account Agreement and Privacy Policy. If you do not agree, please do not enroll in or use these services.",
   },
   {
     title: "2. Eligibility",
@@ -18,19 +18,19 @@ const sections = [
   },
   {
     title: "4. Security & Transaction PIN",
-    body: "You are responsible for keeping your password and 4-digit transaction PIN confidential. Well Trust Bank will never ask for your full PIN or password by phone, email, or text. Notify us immediately if you suspect unauthorized access to your account.",
+    body: "You are responsible for keeping your password and 4-digit transaction PIN confidential. Pinecrest Bank will never ask for your full PIN or password by phone, email, or text. Notify us immediately if you suspect unauthorized access to your account.",
   },
   {
     title: "5. Transfers & Availability of Funds",
-    body: "Internal transfers between Well Trust Bank accounts are typically reflected immediately. External transfers may be subject to review and standard processing timelines. We reserve the right to delay or decline a transfer to protect the security of your account.",
+    body: "Internal transfers between Pinecrest Bank accounts are typically reflected immediately. External transfers may be subject to review and standard processing timelines. We reserve the right to delay or decline a transfer to protect the security of your account.",
   },
   {
     title: "6. Fees",
-    body: "Well Trust Bank does not charge monthly maintenance fees on checking or savings accounts. Certain services, such as expedited external transfers, may carry a disclosed fee at the time of the transaction.",
+    body: "Pinecrest Bank does not charge monthly maintenance fees on checking or savings accounts. Certain services, such as expedited external transfers, may carry a disclosed fee at the time of the transaction.",
   },
   {
     title: "7. Limitation of Liability",
-    body: "Well Trust Bank is not liable for losses caused by circumstances beyond our reasonable control, including power failures, system outages, or unauthorized access resulting from your failure to safeguard your login credentials or PIN.",
+    body: "Pinecrest Bank is not liable for losses caused by circumstances beyond our reasonable control, including power failures, system outages, or unauthorized access resulting from your failure to safeguard your login credentials or PIN.",
   },
   {
     title: "8. Account Suspension & Termination",
@@ -79,7 +79,7 @@ const TermsAndConditions = () => {
         <div className="card p-6 md:p-10">
           <p className="text-slate-500 leading-relaxed mb-8">
             This Online Banking Service Agreement ("Agreement") governs your use
-            of Well Trust Bank's online and mobile banking services. By using
+            of Pinecrest Bank's online and mobile banking services. By using
             these services, you agree to the terms and conditions set forth
             herein. Please read this Agreement carefully and retain a copy for
             your records. This Agreement is subject to change at any time, and

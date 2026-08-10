@@ -16,20 +16,31 @@ export const createMoneyRequest = async (req, res) => {
   try {
     const { identifier, amount, note } = req.body;
     if (!identifier || !amount) {
-      return res.status(400).json({ message: "Recipient email/phone and amount are required" });
+      return res
+        .status(400)
+        .json({ message: "Recipient email/phone and amount are required" });
     }
     if (amount <= 0) {
-      return res.status(400).json({ message: "Amount must be greater than zero" });
+      return res
+        .status(400)
+        .json({ message: "Amount must be greater than zero" });
     }
 
-   const payer = await User.findOne({
+    const payer = await User.findOne({
       $or: [{ email: identifier.toLowerCase() }, { phone: identifier }],
     });
     if (!payer) {
-      return res.status(404).json({ message: "No Well Trust Bank account found with that email or phone number" });
+      return res
+        .status(404)
+        .json({
+          message:
+            "No Pinecrest Bank account found with that email or phone number",
+        });
     }
     if (payer._id.equals(req.user._id)) {
-      return res.status(400).json({ message: "You cannot request money from yourself" });
+      return res
+        .status(400)
+        .json({ message: "You cannot request money from yourself" });
     }
 
     const request = await MoneyRequest.create({
@@ -84,11 +95,18 @@ export const getReceivedRequests = async (req, res) => {
 export const approveMoneyRequest = async (req, res) => {
   try {
     const { pin } = req.body;
-    if (!pin) return res.status(400).json({ message: "Transaction PIN is required" });
+    if (!pin)
+      return res.status(400).json({ message: "Transaction PIN is required" });
 
-    const request = await MoneyRequest.findOne({ _id: req.params.id, payer: req.user._id }).populate("requester");
+    const request = await MoneyRequest.findOne({
+      _id: req.params.id,
+      payer: req.user._id,
+    }).populate("requester");
     if (!request) return res.status(404).json({ message: "Request not found" });
-    if (request.status !== "pending") return res.status(400).json({ message: "This request has already been resolved" });
+    if (request.status !== "pending")
+      return res
+        .status(400)
+        .json({ message: "This request has already been resolved" });
 
     const payer = await User.findById(req.user._id).select("+transactionPin");
     if (!(await payer.comparePin(pin))) {
@@ -98,7 +116,10 @@ export const approveMoneyRequest = async (req, res) => {
     const requester = await User.findById(request.requester._id);
     const isCrossCurrency = requester.currency !== payer.currency;
     const fee = isCrossCurrency
-      ? Math.min(Math.max(request.amount * CONVERSION_FEE_RATE, CONVERSION_FEE_MIN), CONVERSION_FEE_MAX)
+      ? Math.min(
+          Math.max(request.amount * CONVERSION_FEE_RATE, CONVERSION_FEE_MIN),
+          CONVERSION_FEE_MAX,
+        )
       : 0;
     const totalDebit = request.amount + fee;
 
@@ -112,8 +133,13 @@ export const approveMoneyRequest = async (req, res) => {
     let convertedAmount = request.amount;
     let exchangeRate = 1;
     if (isCrossCurrency) {
-      convertedAmount = await convertCurrency(request.amount, payer.currency, requester.currency);
-      exchangeRate = Math.round((convertedAmount / request.amount) * 1000000) / 1000000;
+      convertedAmount = await convertCurrency(
+        request.amount,
+        payer.currency,
+        requester.currency,
+      );
+      exchangeRate =
+        Math.round((convertedAmount / request.amount) * 1000000) / 1000000;
     }
 
     payer.balance -= totalDebit;
@@ -137,7 +163,9 @@ export const approveMoneyRequest = async (req, res) => {
       exchangeRate: isCrossCurrency ? exchangeRate : undefined,
       balanceAfterSender: payer.balance,
       balanceAfterReceiver: requester.balance,
-      description: request.note || `Money request payment to ${requester.firstName} ${requester.lastName}`,
+      description:
+        request.note ||
+        `Money request payment to ${requester.firstName} ${requester.lastName}`,
       category: "Money Request",
       status: "completed",
     });
@@ -173,9 +201,15 @@ export const approveMoneyRequest = async (req, res) => {
 // @route POST /api/requests/:id/decline
 export const declineMoneyRequest = async (req, res) => {
   try {
-    const request = await MoneyRequest.findOne({ _id: req.params.id, payer: req.user._id }).populate("requester");
+    const request = await MoneyRequest.findOne({
+      _id: req.params.id,
+      payer: req.user._id,
+    }).populate("requester");
     if (!request) return res.status(404).json({ message: "Request not found" });
-    if (request.status !== "pending") return res.status(400).json({ message: "This request has already been resolved" });
+    if (request.status !== "pending")
+      return res
+        .status(400)
+        .json({ message: "This request has already been resolved" });
 
     request.status = "declined";
     request.resolvedAt = new Date();
@@ -196,9 +230,15 @@ export const declineMoneyRequest = async (req, res) => {
 // @route POST /api/requests/:id/cancel
 export const cancelMoneyRequest = async (req, res) => {
   try {
-    const request = await MoneyRequest.findOne({ _id: req.params.id, requester: req.user._id });
+    const request = await MoneyRequest.findOne({
+      _id: req.params.id,
+      requester: req.user._id,
+    });
     if (!request) return res.status(404).json({ message: "Request not found" });
-    if (request.status !== "pending") return res.status(400).json({ message: "This request has already been resolved" });
+    if (request.status !== "pending")
+      return res
+        .status(400)
+        .json({ message: "This request has already been resolved" });
 
     request.status = "cancelled";
     request.resolvedAt = new Date();

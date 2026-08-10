@@ -324,7 +324,7 @@ export const transferInternational = async (req, res) => {
 // @route POST /api/transactions/transfer/zelle
 // @route POST /api/transactions/transfer/paypal
 // Both use the same logic: look up the recipient by email (PayPal) or
-// email/phone (Zelle) among Well Trust Bank users. If found, the transfer
+// email/phone (Zelle) among Pinecrest Bank users. If found, the transfer
 // completes instantly — real send AND receive. If not found, it fails with
 // the same reason real Zelle/PayPal give: the recipient isn't enrolled.
 const transferP2P = async (req, res, method) => {
@@ -407,7 +407,7 @@ const transferP2P = async (req, res, method) => {
     await sender.save();
 
     if (receiver) {
-      // Recipient is also a Well Trust Bank user — instant send AND receive
+      // Recipient is also a Pinecrest Bank user — instant send AND receive
       receiver.balance += convertedAmount;
       await receiver.save();
     }

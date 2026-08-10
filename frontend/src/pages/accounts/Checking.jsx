@@ -90,7 +90,7 @@ const Checking = () => (
       <div className="rounded-xl3 overflow-hidden shadow-card h-[280px] md:h-[360px]">
         <img
           src="/check2.jpg"
-          alt="Well Trust Bank checking account"
+          alt="Pinecrest Bank checking account"
           className="w-full h-full object-cover"
         />
       </div>

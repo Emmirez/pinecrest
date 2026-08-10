@@ -219,11 +219,15 @@ const Loans = () => {
               className="input-field resize-none"
             />
 
-         {estimatedMonthly && (
+            {estimatedMonthly && (
               <div className="bg-navy-50 rounded-xl px-4 py-3 text-sm">
-                <p className="text-navy-900 font-semibold flex items-center gap-1.5"><TrendingUp size={14} /> Estimated payment</p>
+                <p className="text-navy-900 font-semibold flex items-center gap-1.5">
+                  <TrendingUp size={14} /> Estimated payment
+                </p>
                 <p className="text-slate-500 text-xs mt-1">
-                  {estimatedRate}% APR · {formatMoney(estimatedMonthly, user?.currency)} / month for {form.termMonths} months
+                  {estimatedRate}% APR ·{" "}
+                  {formatMoney(estimatedMonthly, user?.currency)} / month for{" "}
+                  {form.termMonths} months
                 </p>
               </div>
             )}
@@ -236,21 +240,34 @@ const Loans = () => {
                 className="h-4 w-4 mt-0.5 accent-navy shrink-0"
               />
               <span className="text-sm">
-                <span className="font-semibold text-navy-900">I agree to the terms and conditions</span>
+                <span className="font-semibold text-navy-900">
+                  I agree to the terms and conditions
+                </span>
                 <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                  By submitting this application, I confirm that all information provided is accurate and complete. I authorize Well Trust Bank to verify my information and credit history.
+                  By submitting this application, I confirm that all information
+                  provided is accurate and complete. I authorize Pinecrest Bank
+                  to verify my information and credit history.
                 </p>
               </span>
             </label>
 
-            <button type="submit" disabled={submitting || !agreed} className="btn-primary w-full flex items-center justify-center gap-2">
-              <Send size={16} /> {submitting ? "Submitting..." : "Submit Loan Application"}
+            <button
+              type="submit"
+              disabled={submitting || !agreed}
+              className="btn-primary w-full flex items-center justify-center gap-2"
+            >
+              <Send size={16} />{" "}
+              {submitting ? "Submitting..." : "Submit Loan Application"}
             </button>
-            <button type="button" onClick={() => setShowForm(false)} className="btn-secondary w-full flex items-center justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowForm(false)}
+              className="btn-secondary w-full flex items-center justify-center gap-2"
+            >
               <X size={16} /> Cancel
             </button>
           </form>
-        )}  
+        )}
 
         {loading ? (
           <p className="text-sm text-slate-400">Loading loans...</p>

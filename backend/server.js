@@ -34,8 +34,8 @@ const httpServer = http.createServer(app);
 
 const allowedOrigins = [
   process.env.CLIENT_URL,
-  "https://welltrustapp.com",
-  "https://www.welltrustapp.com",
+  "https://pinecrestpay.com",
+  "https://www.pinecrestpay.com",
 ].filter(Boolean);
 
 app.use(
@@ -54,7 +54,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.get("/api/health", (req, res) =>
-  res.json({ status: "ok", bank: "Well Trust Bank API" }),
+  res.json({ status: "ok", bank: "Pinecrest Bank API" }),
 );
 
 app.use("/api/auth", authRoutes);
@@ -83,5 +83,5 @@ initSocket(httpServer);
 
 const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, () => {
-  console.log(`Well Trust Bank API running on port ${PORT}`);
+  console.log(`Pinecrest Bank API running on port ${PORT}`);
 });

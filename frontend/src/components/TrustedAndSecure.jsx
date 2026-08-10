@@ -63,7 +63,7 @@ const TrustedAndSecure = () => {
       </div>
 
       <p className="text-xs text-slate-400 mt-8 max-w-md mx-auto">
-        Well Trust Bank, Member FDIC. Deposits insured up to $250,000 per
+        Pinecrest Bank, Member FDIC. Deposits insured up to $250,000 per
         depositor, per ownership category. SIPC protection available for
         securities accounts.
       </p>

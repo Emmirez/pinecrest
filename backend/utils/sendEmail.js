@@ -16,7 +16,7 @@ export const sendEmail = async ({ to, toName, subject, html }) => {
       },
       body: JSON.stringify({
         sender: {
-          name: process.env.BREVO_SENDER_NAME || "Well Trust Bank",
+          name: process.env.BREVO_SENDER_NAME || "Pinecrest Bank",
           email: process.env.BREVO_SENDER_EMAIL,
         },
         to: [{ email: to, name: toName || to }],
@@ -44,7 +44,7 @@ export const sendEmail = async ({ to, toName, subject, html }) => {
 const NAVY = "#0B2545";
 const GOLD = "#C9A227";
 const SLATE = "#64748B";
-const LOGO_URL = "https://welltrustapp.com/logo.png";
+const LOGO_URL = "https://pinecrestpay.com/logo.png";
 
 const emailShell = (bodyHtml) => `
   <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; background:#ffffff; border: 1px solid #e5e7eb; border-radius: 14px; overflow: hidden;">
@@ -54,7 +54,7 @@ const emailShell = (bodyHtml) => `
       <table style="width:100%; border-collapse: collapse;">
         <tr>
           <td style="vertical-align:middle;">
-            <img src="${LOGO_URL}" alt="Well Trust Bank" width="36" height="36" style="display:block; border-radius:8px;" />
+            <img src="${LOGO_URL}" alt="Pinecrest Bank" width="36" height="36" style="display:block; border-radius:8px;" />
           </td>
           <td style="vertical-align:middle; padding-left:10px;">
             <span style="font-size:18px; font-weight:bold; color:#ffffff;">Well Trust</span>
@@ -72,12 +72,12 @@ const emailShell = (bodyHtml) => `
 
     <!-- Footer -->
     <div style="border-top:1px solid #e5e7eb; padding: 20px 28px; background:#f8fafc;">
-      <p style="margin:0 0 4px 0; font-size:12px; font-weight:bold; color:${NAVY};">Well Trust Bank</p>
+      <p style="margin:0 0 4px 0; font-size:12px; font-weight:bold; color:${NAVY};">Pinecrest Bank</p>
       <p style="margin:0 0 4px 0; font-size:11px; color:${SLATE};">Rue des Alpes 141201 Geneva Switzerland</p>
-      <p style="margin:0 0 12px 0; font-size:11px; color:${SLATE};">support@welltrustbank.com &nbsp;·&nbsp; +1 (863) 333-9415</p>
+      <p style="margin:0 0 12px 0; font-size:11px; color:${SLATE};">support@pinecrestbank.com &nbsp;·&nbsp; +1 (863) 333-9415</p>
       <p style="margin:0; font-size:10px; color:${SLATE}; line-height:1.5;">
         <p style="margin:16px 0 0 0; color:${SLATE}; font-size: 11px;">
-      This email is provided for informational purposes only. Well Trust Bank, Member FDIC. Deposits insured up to $250,000 per depositor, per ownership category.
+      This email is provided for informational purposes only. Pinecrest Bank, Member FDIC. Deposits insured up to $250,000 per depositor, per ownership category.
       </p>
       </p>
     </div>
@@ -97,7 +97,7 @@ export const otpEmailTemplate = (name, otp) =>
 
   <p style="margin:0 0 16px 0; color:#374151; font-size:14px;">This code expires in 10 minutes. If you didn't request this, you can safely ignore this email.</p>
 
-  <p style="color:${SLATE}; font-size: 12px; margin:0;">Well Trust Bank never asks for your password or PIN by email.</p>
+  <p style="color:${SLATE}; font-size: 12px; margin:0;">Pinecrest Bank never asks for your password or PIN by email.</p>
 `);
 
 const formatMoney = (amount, currency) => {
@@ -115,7 +115,7 @@ export const transactionEmailTemplate = ({
   date,
 }) => {
   const isCredit = action === "credited";
-  const historyUrl = "https://welltrustapp.com/dashboard/transactions";
+  const historyUrl = "https://pinecrestpay.com/dashboard/transactions";
 
   return emailShell(`
     <p style="margin:0 0 16px 0; color:#111827;">Dear ${name},</p>
@@ -129,7 +129,7 @@ export const transactionEmailTemplate = ({
       </p>
     </div>
 
-    <p style="margin:0 0 16px 0; color:#111827;">Your Well Trust Bank account has been <strong>${action}</strong> in the amount of <strong>${formatMoney(amount, currency)}</strong>.</p>
+    <p style="margin:0 0 16px 0; color:#111827;">Your Pinecrest Bank account has been <strong>${action}</strong> in the amount of <strong>${formatMoney(amount, currency)}</strong>.</p>
 
     <table style="width:100%; font-size: 14px; color:#374151; border-collapse:collapse;">
       <tr><td style="padding:8px 0; border-bottom:1px solid #f1f5f9;">Transaction Reference</td><td style="padding:8px 0; border-bottom:1px solid #f1f5f9; text-align:right;">${reference}</td></tr>
@@ -148,14 +148,14 @@ export const transactionEmailTemplate = ({
     </table>
 
     <p style="margin:20px 0 0 0; color:${SLATE}; font-size: 12px;">If you did not authorize this transaction, please contact support immediately.</p>
-    <p style="margin:8px 0 0 0; color:${SLATE}; font-size: 11px;">Well Trust Bank, Member FDIC. Deposits insured up to $250,000 per depositor, per ownership category.</p>
+    <p style="margin:8px 0 0 0; color:${SLATE}; font-size: 11px;">Pinecrest Bank, Member FDIC. Deposits insured up to $250,000 per depositor, per ownership category.</p>
     <p style="margin:4px 0 0 0; color:${SLATE}; font-size: 11px;">This is an automated notification. Please do not reply to this email.</p>
   `);
 };
 
 export const approvalEmailTemplate = (name, status) => {
   const isApproved = status === "active";
-  const loginUrl = "https://welltrustapp.com/login";
+  const loginUrl = "https://pinecrestpay.com/login";
 
   return emailShell(`
     <p style="margin:0 0 16px 0; color:#111827;">Hi ${name},</p>
@@ -168,7 +168,7 @@ export const approvalEmailTemplate = (name, status) => {
 
     ${
       isApproved
-        ? `<p style="margin:0 0 20px 0; color:#111827;">Great news — your Well Trust Bank account has been approved and is now active. You can log in and start banking right away.</p>`
+        ? `<p style="margin:0 0 20px 0; color:#111827;">Great news — your Pinecrest Bank account has been approved and is now active. You can log in and start banking right away.</p>`
         : `<p style="margin:0 0 20px 0; color:#111827;">We were unable to approve your account application at this time. Please contact our support team for more information.</p>`
     }
 
@@ -186,7 +186,7 @@ export const approvalEmailTemplate = (name, status) => {
         : `<table style="width:100%; border-collapse:collapse;">
              <tr>
                <td align="center">
-                 <a href="https://welltrustapp.com/contact" style="display:inline-block; background:${NAVY}; color:#ffffff; text-decoration:none; font-weight:bold; font-size:14px; padding:12px 28px; border-radius:10px;">
+                 <a href="https://pinecrestpay.com/contact" style="display:inline-block; background:${NAVY}; color:#ffffff; text-decoration:none; font-weight:bold; font-size:14px; padding:12px 28px; border-radius:10px;">
                    Contact Support
                  </a>
                </td>

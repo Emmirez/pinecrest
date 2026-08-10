@@ -1,20 +1,46 @@
 import { useEffect, useState } from "react";
 import {
-  HandCoins, Plus, X, KeyRound, ArrowRight, CheckCircle2, XCircle, Clock3, Ban,
+  HandCoins,
+  Plus,
+  X,
+  KeyRound,
+  ArrowRight,
+  CheckCircle2,
+  XCircle,
+  Clock3,
+  Ban,
 } from "lucide-react";
 import api from "../api/axios";
 import TopBar from "../components/TopBar";
 import { useUserMenu } from "../components/DashboardLayout";
 
 const statusConfig = {
-  pending: { label: "Pending", color: "bg-gold-50 text-gold-700", icon: Clock3 },
-  approved: { label: "Paid", color: "bg-emerald-50 text-emerald-600", icon: CheckCircle2 },
-  declined: { label: "Declined", color: "bg-red-50 text-red-500", icon: XCircle },
-  cancelled: { label: "Cancelled", color: "bg-slate-100 text-slate-500", icon: Ban },
+  pending: {
+    label: "Pending",
+    color: "bg-gold-50 text-gold-700",
+    icon: Clock3,
+  },
+  approved: {
+    label: "Paid",
+    color: "bg-emerald-50 text-emerald-600",
+    icon: CheckCircle2,
+  },
+  declined: {
+    label: "Declined",
+    color: "bg-red-50 text-red-500",
+    icon: XCircle,
+  },
+  cancelled: {
+    label: "Cancelled",
+    color: "bg-slate-100 text-slate-500",
+    icon: Ban,
+  },
 };
 
 const formatMoney = (amount, currency = "USD") =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency }).format(amount || 0);
+  new Intl.NumberFormat("en-US", { style: "currency", currency }).format(
+    amount || 0,
+  );
 
 const MoneyRequests = () => {
   const { onMenuClick } = useUserMenu();
@@ -34,16 +60,17 @@ const MoneyRequests = () => {
 
   const load = () => {
     setLoading(true);
-    Promise.all([
-      api.get("/requests/received"),
-      api.get("/requests/sent"),
-    ]).then(([r1, r2]) => {
-      setReceived(r1.data.requests);
-      setSent(r2.data.requests);
-    }).finally(() => setLoading(false));
+    Promise.all([api.get("/requests/received"), api.get("/requests/sent")])
+      .then(([r1, r2]) => {
+        setReceived(r1.data.requests);
+        setSent(r2.data.requests);
+      })
+      .finally(() => setLoading(false));
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const submitRequest = async (e) => {
     e.preventDefault();
@@ -80,7 +107,9 @@ const MoneyRequests = () => {
       setPin("");
       load();
     } catch (err) {
-      setApproveError(err.response?.data?.message || "Could not approve request");
+      setApproveError(
+        err.response?.data?.message || "Could not approve request",
+      );
     }
   };
 
@@ -93,22 +122,36 @@ const MoneyRequests = () => {
       <div className="px-4 md:px-8 max-w-2xl">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-navy-900">Request Money</h1>
-            <p className="text-sm text-slate-400 mt-0.5">Ask another Well Trust Bank user to send you money.</p>
+            <h1 className="text-xl md:text-2xl font-bold text-navy-900">
+              Request Money
+            </h1>
+            <p className="text-sm text-slate-400 mt-0.5">
+              Ask another Pinecrest Bank user to send you money.
+            </p>
           </div>
-          <button onClick={() => setShowForm((s) => !s)} className="btn-primary flex items-center gap-2 !py-2.5 shrink-0">
-            {showForm ? <X size={16} /> : <Plus size={16} />} {showForm ? "Cancel" : "New Request"}
+          <button
+            onClick={() => setShowForm((s) => !s)}
+            className="btn-primary flex items-center gap-2 !py-2.5 shrink-0"
+          >
+            {showForm ? <X size={16} /> : <Plus size={16} />}{" "}
+            {showForm ? "Cancel" : "New Request"}
           </button>
         </div>
 
         {showForm && (
           <form onSubmit={submitRequest} className="card p-5 space-y-3 mb-6">
-            {formError && <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">{formError}</div>}
+            {formError && (
+              <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">
+                {formError}
+              </div>
+            )}
             <input
               required
               placeholder="Their email or phone number"
               value={form.identifier}
-              onChange={(e) => setForm((f) => ({ ...f, identifier: e.target.value }))}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, identifier: e.target.value }))
+              }
               className="input-field"
             />
             <input
@@ -118,7 +161,9 @@ const MoneyRequests = () => {
               min="0.01"
               placeholder="Amount"
               value={form.amount}
-              onChange={(e) => setForm((f) => ({ ...f, amount: e.target.value }))}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, amount: e.target.value }))
+              }
               className="input-field"
             />
             <input
@@ -127,7 +172,11 @@ const MoneyRequests = () => {
               onChange={(e) => setForm((f) => ({ ...f, note: e.target.value }))}
               className="input-field"
             />
-            <button type="submit" disabled={submitting} className="btn-gold w-full">
+            <button
+              type="submit"
+              disabled={submitting}
+              className="btn-gold w-full"
+            >
               {submitting ? "Sending..." : "Send Request"}
             </button>
           </form>
@@ -153,7 +202,9 @@ const MoneyRequests = () => {
         ) : list.length === 0 ? (
           <div className="card p-10 text-center text-slate-400 text-sm">
             <HandCoins size={28} className="mx-auto mb-3 text-slate-300" />
-            {tab === "received" ? "No money requests received yet." : "You haven't sent any requests yet."}
+            {tab === "received"
+              ? "No money requests received yet."
+              : "You haven't sent any requests yet."}
           </div>
         ) : (
           <div className="space-y-3">
@@ -166,14 +217,26 @@ const MoneyRequests = () => {
                   <div className="flex items-center justify-between gap-3">
                     <div className="min-w-0">
                       <p className="font-semibold text-navy-900 text-sm">
-                        {tab === "received" ? `${otherPerson?.firstName} ${otherPerson?.lastName} requested` : `You requested from ${otherPerson?.firstName} ${otherPerson?.lastName}`}
+                        {tab === "received"
+                          ? `${otherPerson?.firstName} ${otherPerson?.lastName} requested`
+                          : `You requested from ${otherPerson?.firstName} ${otherPerson?.lastName}`}
                       </p>
-                      {r.note && <p className="text-xs text-slate-400 mt-0.5">{r.note}</p>}
-                      <p className="text-xs text-slate-400 mt-0.5">{new Date(r.createdAt).toLocaleDateString("en-US")}</p>
+                      {r.note && (
+                        <p className="text-xs text-slate-400 mt-0.5">
+                          {r.note}
+                        </p>
+                      )}
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        {new Date(r.createdAt).toLocaleDateString("en-US")}
+                      </p>
                     </div>
                     <div className="text-right shrink-0">
-                      <p className="font-bold text-navy-900">{formatMoney(r.amount, r.currency)}</p>
-                      <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full mt-1 ${config.color}`}>
+                      <p className="font-bold text-navy-900">
+                        {formatMoney(r.amount, r.currency)}
+                      </p>
+                      <span
+                        className={`inline-flex items-center gap-1.5 text-xs font-medium px-2 py-0.5 rounded-full mt-1 ${config.color}`}
+                      >
                         <StatusIcon size={11} /> {config.label}
                       </span>
                     </div>
@@ -181,16 +244,29 @@ const MoneyRequests = () => {
 
                   {tab === "received" && r.status === "pending" && (
                     <div className="flex gap-2 mt-3">
-                      <button onClick={() => { setApproving(r); setPin(""); setApproveError(""); }} className="btn-primary !py-2 flex-1 text-sm">
+                      <button
+                        onClick={() => {
+                          setApproving(r);
+                          setPin("");
+                          setApproveError("");
+                        }}
+                        className="btn-primary !py-2 flex-1 text-sm"
+                      >
                         Pay
                       </button>
-                      <button onClick={() => decline(r._id)} className="btn-secondary !py-2 flex-1 text-sm">
+                      <button
+                        onClick={() => decline(r._id)}
+                        className="btn-secondary !py-2 flex-1 text-sm"
+                      >
                         Decline
                       </button>
                     </div>
                   )}
                   {tab === "sent" && r.status === "pending" && (
-                    <button onClick={() => cancel(r._id)} className="btn-secondary !py-2 w-full text-sm mt-3">
+                    <button
+                      onClick={() => cancel(r._id)}
+                      className="btn-secondary !py-2 w-full text-sm mt-3"
+                    >
                       Cancel Request
                     </button>
                   )}
@@ -207,17 +283,28 @@ const MoneyRequests = () => {
           <div className="bg-white w-full sm:max-w-sm sm:rounded-2xl rounded-t-3xl shadow-2xl p-6">
             <div className="flex items-center justify-between mb-4">
               <p className="font-semibold text-navy-900">Confirm Payment</p>
-              <button onClick={() => setApproving(null)} className="text-slate-400 hover:text-navy transition">
+              <button
+                onClick={() => setApproving(null)}
+                className="text-slate-400 hover:text-navy transition"
+              >
                 <X size={20} />
               </button>
             </div>
             <p className="text-sm text-slate-500 mb-4">
-              Pay {formatMoney(approving.amount, approving.currency)} to {approving.requester?.firstName} {approving.requester?.lastName}?
+              Pay {formatMoney(approving.amount, approving.currency)} to{" "}
+              {approving.requester?.firstName} {approving.requester?.lastName}?
             </p>
             <form onSubmit={submitApprove} className="space-y-3">
-              {approveError && <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">{approveError}</div>}
+              {approveError && (
+                <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">
+                  {approveError}
+                </div>
+              )}
               <div className="relative">
-                <KeyRound size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <KeyRound
+                  size={17}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+                />
                 <input
                   required
                   type="password"
@@ -225,11 +312,16 @@ const MoneyRequests = () => {
                   maxLength={4}
                   placeholder="4-digit transaction PIN"
                   value={pin}
-                  onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                  onChange={(e) =>
+                    setPin(e.target.value.replace(/\D/g, "").slice(0, 4))
+                  }
                   className="input-field !pl-10 tracking-widest"
                 />
               </div>
-              <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
+              <button
+                type="submit"
+                className="btn-primary w-full flex items-center justify-center gap-2"
+              >
                 Confirm Payment <ArrowRight size={16} />
               </button>
             </form>

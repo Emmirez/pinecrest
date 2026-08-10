@@ -12,7 +12,7 @@ const beneficiarySchema = new mongoose.Schema(
     accountNumber: { type: String, required: true },
     bankName: { type: String, required: true },
     routingNumber: { type: String },
-    isInternal: { type: Boolean, default: false }, // true if it's another Well Trust Bank user
+    isInternal: { type: Boolean, default: false }, // true if it's another Pinecrest Bank user
     internalUser: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 
     // International wire details (optional — only needed for international beneficiaries)

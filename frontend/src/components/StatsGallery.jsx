@@ -10,15 +10,15 @@ const stats = [
 const galleryImages = [
   {
     src: "/team1.jpg",
-    alt: "Well Trust Bank headquarters",
+    alt: "Pinecrest Bank headquarters",
   },
   {
     src: "/wellbank3.jpg",
-    alt: "Well Trust Bank office collaboration",
+    alt: "Pinecrest Bank office collaboration",
   },
   {
     src: "https://images.unsplash.com/photo-1556740758-90de374c12ad?q=80&w=900&auto=format&fit=crop",
-    alt: "Well Trust Bank team meeting",
+    alt: "Pinecrest Bank team meeting",
   },
 ];
 

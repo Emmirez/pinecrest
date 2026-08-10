@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 const sections = [
   {
     title: "1. Information We Collect",
-    body: "When you apply for a Well Trust Bank account, we collect the information necessary to verify your identity and administer your account: your full name, date of birth, Social Security Number, residential address, phone number, and email address. When you use online and mobile banking, we also collect transaction data, device information, IP address, login timestamps, and the general information you provide when contacting support. We do not collect more than what's needed to open, verify, and service your account.",
+    body: "When you apply for a Pinecrest Bank account, we collect the information necessary to verify your identity and administer your account: your full name, date of birth, Social Security Number, residential address, phone number, and email address. When you use online and mobile banking, we also collect transaction data, device information, IP address, login timestamps, and the general information you provide when contacting support. We do not collect more than what's needed to open, verify, and service your account.",
   },
   {
     title: "2. How We Use Your Information",
@@ -22,7 +22,7 @@ const sections = [
   },
   {
     title: "5. Cookies & Tracking",
-    body: "Our website and application use essential cookies to keep you logged in and to remember your session securely. We do not use third-party advertising cookies or trackers on Well Trust Bank's banking platform. Any analytics we use are limited to understanding aggregate usage patterns and do not attempt to identify individual account holders for marketing purposes.",
+    body: "Our website and application use essential cookies to keep you logged in and to remember your session securely. We do not use third-party advertising cookies or trackers on Pinecrest Bank's banking platform. Any analytics we use are limited to understanding aggregate usage patterns and do not attempt to identify individual account holders for marketing purposes.",
   },
   {
     title: "6. Your Rights and Choices",
@@ -34,7 +34,7 @@ const sections = [
   },
   {
     title: "8. Children's Privacy",
-    body: "Well Trust Bank's services are intended for individuals who are at least 18 years old. We do not knowingly collect personal information from anyone under 18. If we learn that an account was opened by someone who does not meet this age requirement, we will take steps to close the account and remove associated data.",
+    body: "Pinecrest Bank's services are intended for individuals who are at least 18 years old. We do not knowingly collect personal information from anyone under 18. If we learn that an account was opened by someone who does not meet this age requirement, we will take steps to close the account and remove associated data.",
   },
   {
     title: "9. Changes to This Policy",
@@ -64,7 +64,7 @@ const PrivacyPolicy = () => (
       <div className="rounded-xl3 overflow-hidden shadow-card h-[220px] md:h-[320px]">
         <img
           src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1600&auto=format&fit=crop"
-          alt="Data privacy and security at Well Trust Bank"
+          alt="Data privacy and security at Pinecrest Bank"
           className="w-full h-full object-cover"
         />
       </div>
@@ -73,7 +73,7 @@ const PrivacyPolicy = () => (
     <section className="max-w-5xl mx-auto px-4 md:px-8 py-14 md:py-20">
       <div className="card p-6 md:p-10">
         <p className="text-slate-500 leading-relaxed mb-8">
-          Well Trust Bank respects your privacy and is committed to protecting
+          Pinecrest Bank respects your privacy and is committed to protecting
           the personal information you share with us. This policy explains what
           we collect, why we collect it, and the choices you have. This is a
           portfolio-project document written for demonstration purposes and does

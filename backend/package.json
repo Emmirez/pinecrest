@@ -1,7 +1,7 @@
 {
-  "name": "welltrust-bank-backend",
+  "name": "pinecrest-bank-backend",
   "version": "1.0.0",
-  "description": "Well Trust Bank - backend API (Node.js, Express, MongoDB)",
+  "description": "Pinecrest Bank - backend API (Node.js, Express, MongoDB)",
   "main": "server.js",
   "type": "module",
   "scripts": {

@@ -33,7 +33,7 @@ const points = [
   {
     icon: Landmark,
     title: "Built for real life abroad",
-    desc: "Paid in one currency, spending in another, saving in a third — Well Trust Bank is built around that reality.",
+    desc: "Paid in one currency, spending in another, saving in a third — Pinecrest Bank is built around that reality.",
   },
 ];
 

@@ -32,45 +32,41 @@ const leadership = [
   {
     name: "Marcus Ellison",
     role: "Chief Executive Officer",
-    bio: "15+ years in retail banking before founding Well Trust Bank to fix what legacy banks got wrong.",
-    photo:
-     "/Raul.jpg",
+    bio: "15+ years in retail banking before founding Pinecrest Bank to fix what legacy banks got wrong.",
+    photo: "/Raul.jpg",
   },
   {
     name: "Dana Whitfield",
     role: "Chief Financial Officer",
     bio: "Former investment analyst focused on making sure every dollar in the system is accounted for.",
-    photo:
-      "/Royalty.jpg",
+    photo: "/Royalty.jpg",
   },
   {
     name: "Renee Nandakumar",
     role: "Chief Technology Officer",
     bio: "Leads engineering — the person responsible for keeping transfers instant and accounts secure.",
-    photo:
-      "/Renee.jpg",
+    photo: "/Renee.jpg",
   },
   {
     name: "James Erwin",
     role: "Chief Operating Officer",
     bio: "Oversees account approvals and support — the team behind every application review.",
-    photo:
-      "/Timo.jpg",
+    photo: "/Timo.jpg",
   },
 ];
 
 const galleryImages = [
   {
     src: "/global1.jpg",
-    alt: "Well Trust Bank headquarters",
+    alt: "Pinecrest Bank headquarters",
   },
   {
     src: "/wellbank3.jpg",
-    alt: "Well Trust Bank office collaboration",
+    alt: "Pinecrest Bank office collaboration",
   },
   {
     src: "wellbank4.jpg",
-    alt: "Well Trust Bank team meeting",
+    alt: "Pinecrest Bank team meeting",
   },
 ];
 
@@ -88,7 +84,7 @@ const AboutUs = () => {
           Building a better banking experience
         </h1>
         <p className="text-slate-500 mt-5 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-          Well Trust Bank was founded with a clear and enduring purpose: to
+          Pinecrest Bank was founded with a clear and enduring purpose: to
           create a financial institution that combines the strength, security,
           and regulatory oversight of a traditional bank with the
           responsiveness, transparency, and customer focus that people expect in
@@ -101,7 +97,7 @@ const AboutUs = () => {
           disconnected from their financial institutions. They open accounts
           without fully understanding the terms, encounter fees they didn't
           anticipate, and struggle to reach someone who can actually help when
-          problems arise. We set out to change that. At Well Trust Bank, we're
+          problems arise. We set out to change that. At Pinecrest Bank, we're
           reimagining what banking looks like — not by abandoning the principles
           that make banking trustworthy, but by strengthening them with modern
           technology and a relentless commitment to our customers.
@@ -139,7 +135,7 @@ const AboutUs = () => {
           a time.
           <br />
           <br />
-          At Well Trust Bank, we measure our success not by quarterly earnings
+          At Pinecrest Bank, we measure our success not by quarterly earnings
           alone, but by the satisfaction and confidence of our customers. We
           celebrate every account opened, every question answered, and every
           problem solved. We're proud of the work we do, and we're constantly
@@ -159,7 +155,7 @@ const AboutUs = () => {
           trusts us with their financial life.
           <br />
           <br />
-          Welcome to Well Trust Bank. We're here for you — today, tomorrow, and
+          Welcome to Pinecrest Bank. We're here for you — today, tomorrow, and
           every day after.
         </p>
       </section>
@@ -168,7 +164,7 @@ const AboutUs = () => {
         <div className="rounded-xl3 overflow-hidden shadow-card h-[280px] md:h-[420px]">
           <img
             src="/wellbank5.jpg"
-            alt="Well Trust Bank headquarters building"
+            alt="Pinecrest Bank headquarters building"
             className="w-full h-full object-cover"
           />
         </div>
@@ -286,7 +282,7 @@ const AboutUs = () => {
             Ready to bank with us?
           </h2>
           <p className="text-slate-300 mt-3 max-w-lg mx-auto relative">
-            Join the account holders who trust Well Trust Bank with real
+            Join the account holders who trust Pinecrest Bank with real
             approvals and real support.
           </p>
           <Link

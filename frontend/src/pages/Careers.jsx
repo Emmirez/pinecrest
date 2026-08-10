@@ -75,7 +75,7 @@ const Careers = () => (
           Join us in building the future of banking
         </h1>
         <p className="text-slate-500 mt-5 text-base md:text-lg leading-relaxed">
-          At Well Trust Bank, we're reimagining what a bank can be — combining
+          At Pinecrest Bank, we're reimagining what a bank can be — combining
           the stability and trust of a regulated financial institution with the
           speed and innovation of modern technology. We're looking for talented
           individuals who share our passion for customer experience, security,
@@ -92,7 +92,7 @@ const Careers = () => (
       <div className="rounded-xl3 overflow-hidden shadow-card h-[280px] md:h-[380px]">
         <img
           src="/career1.jpg"
-          alt="Well Trust Bank team collaborating"
+          alt="Pinecrest Bank team collaborating"
           className="w-full h-full object-cover"
         />
       </div>
@@ -128,7 +128,7 @@ const Careers = () => (
       <div className="rounded-xl3 overflow-hidden shadow-card h-[260px] md:h-[360px]">
         <img
           src="/career.jpg"
-          alt="Well Trust Bank headquarters"
+          alt="Pinecrest Bank headquarters"
           className="w-full h-full object-cover"
         />
       </div>

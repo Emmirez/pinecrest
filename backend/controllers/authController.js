@@ -90,7 +90,7 @@ export const register = async (req, res) => {
     await sendEmail({
       to: user.email,
       toName: user.firstName,
-      subject: "Verify your Well Trust Bank account",
+      subject: "Verify your Pinecrest Bank account",
       html: otpEmailTemplate(user.firstName, emailOtp),
     });
 
@@ -187,7 +187,7 @@ export const resendOtp = async (req, res) => {
     await sendEmail({
       to: user.email,
       toName: user.firstName,
-      subject: "Your new Well Trust Bank verification code",
+      subject: "Your new Pinecrest Bank verification code",
       html: otpEmailTemplate(user.firstName, otp),
     });
 
@@ -227,11 +227,9 @@ export const login = async (req, res) => {
       });
     }
     if (user.status === "suspended") {
-      return res
-        .status(403)
-        .json({
-          message: "Your account is currently suspended. Contact support.",
-        });
+      return res.status(403).json({
+        message: "Your account is currently suspended. Contact support.",
+      });
     }
 
     if (user.twoFactorEnabled) {
@@ -339,7 +337,7 @@ export const forgotPassword = async (req, res) => {
     await sendEmail({
       to: user.email,
       toName: user.firstName,
-      subject: "Reset your Well Trust Bank password",
+      subject: "Reset your Pinecrest Bank password",
       html: otpEmailTemplate(user.firstName, otp),
     });
 

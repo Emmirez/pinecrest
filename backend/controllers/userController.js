@@ -2,14 +2,22 @@ import User from "../models/User.js";
 import Transaction from "../models/Transaction.js";
 import Notification from "../models/Notification.js";
 import { notifyGeneral } from "../utils/notify.js";
-import { generateTwoFactorSecret, generateQrCode, verifyTwoFactorToken } from "../utils/twoFactor.js";
+import {
+  generateTwoFactorSecret,
+  generateQrCode,
+  verifyTwoFactorToken,
+} from "../utils/twoFactor.js";
 import { uploadBufferToCloudinary } from "../utils/uploadToCloudinary.js";
 import { getLimitUsage } from "../utils/transferLimits.js";
 import { generateStatementPdf } from "../utils/generateStatement.js";
 
 const DEBIT_TYPES = [
-  "transfer_internal", "transfer_external", "transfer_international",
-  "transfer_zelle", "transfer_paypal", "adjustment_debit",
+  "transfer_internal",
+  "transfer_external",
+  "transfer_international",
+  "transfer_zelle",
+  "transfer_paypal",
+  "adjustment_debit",
 ];
 
 // @route GET /api/users/dashboard
@@ -42,9 +50,12 @@ export const getDashboard = async (req, res) => {
       { $sort: { total: -1 } },
     ]);
 
-    const unreadCount = await Notification.countDocuments({ user: user._id, read: false });
+    const unreadCount = await Notification.countDocuments({
+      user: user._id,
+      read: false,
+    });
 
-   return res.json({
+    return res.json({
       user: {
         id: user._id,
         firstName: user.firstName,
@@ -72,7 +83,13 @@ export const getDashboard = async (req, res) => {
 // @route PUT /api/users/profile
 export const updateProfile = async (req, res) => {
   try {
-    const allowedFields = ["firstName", "lastName", "phone", "address", "avatarUrl"];
+    const allowedFields = [
+      "firstName",
+      "lastName",
+      "phone",
+      "address",
+      "avatarUrl",
+    ];
     const updates = {};
     allowedFields.forEach((field) => {
       if (req.body[field] !== undefined) updates[field] = req.body[field];
@@ -98,7 +115,10 @@ export const updateNotificationPrefs = async (req, res) => {
     if (sms !== undefined) user.notificationPrefs.sms = sms;
     if (inApp !== undefined) user.notificationPrefs.inApp = inApp;
     await user.save();
-    return res.json({ message: "Preferences updated", notificationPrefs: user.notificationPrefs });
+    return res.json({
+      message: "Preferences updated",
+      notificationPrefs: user.notificationPrefs,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Could not update preferences" });
   }
@@ -121,7 +141,7 @@ export const markNotificationRead = async (req, res) => {
   try {
     await Notification.findOneAndUpdate(
       { _id: req.params.id, user: req.user._id },
-      { read: true }
+      { read: true },
     );
     return res.json({ message: "Marked as read" });
   } catch (error) {
@@ -132,7 +152,10 @@ export const markNotificationRead = async (req, res) => {
 // @route PUT /api/users/notifications/read-all
 export const markAllNotificationsRead = async (req, res) => {
   try {
-    await Notification.updateMany({ user: req.user._id, read: false }, { read: true });
+    await Notification.updateMany(
+      { user: req.user._id, read: false },
+      { read: true },
+    );
     return res.json({ message: "All notifications marked as read" });
   } catch (error) {
     return res.status(500).json({ message: "Could not update notifications" });
@@ -142,8 +165,12 @@ export const markAllNotificationsRead = async (req, res) => {
 // @route DELETE /api/users/notifications/:id
 export const deleteNotification = async (req, res) => {
   try {
-    const result = await Notification.findOneAndDelete({ _id: req.params.id, user: req.user._id });
-    if (!result) return res.status(404).json({ message: "Notification not found" });
+    const result = await Notification.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user._id,
+    });
+    if (!result)
+      return res.status(404).json({ message: "Notification not found" });
     return res.json({ message: "Notification deleted" });
   } catch (error) {
     return res.status(500).json({ message: "Could not delete notification" });
@@ -194,13 +221,17 @@ export const changePassword = async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
     if (!currentPassword || !newPassword) {
-      return res.status(400).json({ message: "Current and new password are required" });
+      return res
+        .status(400)
+        .json({ message: "Current and new password are required" });
     }
     if (newPassword.length < 8) {
-      return res.status(400).json({ message: "New password must be at least 8 characters" });
+      return res
+        .status(400)
+        .json({ message: "New password must be at least 8 characters" });
     }
 
-   const user = await User.findById(req.user._id).select("+password");
+    const user = await User.findById(req.user._id).select("+password");
     if (!(await user.comparePassword(currentPassword))) {
       return res.status(400).json({ message: "Current password is incorrect" });
     }
@@ -210,7 +241,8 @@ export const changePassword = async (req, res) => {
 
     await notifyGeneral(user, {
       title: "Password changed",
-      message: "Your account password was just changed. If this wasn't you, contact support immediately.",
+      message:
+        "Your account password was just changed. If this wasn't you, contact support immediately.",
       type: "security",
       email: true,
     });
@@ -226,7 +258,9 @@ export const changePin = async (req, res) => {
   try {
     const { currentPassword, newPin, confirmPin } = req.body;
     if (!currentPassword || !newPin || !confirmPin) {
-      return res.status(400).json({ message: "Password and new PIN are required" });
+      return res
+        .status(400)
+        .json({ message: "Password and new PIN are required" });
     }
     if (!/^\d{4}$/.test(newPin)) {
       return res.status(400).json({ message: "PIN must be exactly 4 digits" });
@@ -245,7 +279,8 @@ export const changePin = async (req, res) => {
 
     await notifyGeneral(user, {
       title: "Transaction PIN changed",
-      message: "Your transaction PIN was just changed. If this wasn't you, contact support immediately.",
+      message:
+        "Your transaction PIN was just changed. If this wasn't you, contact support immediately.",
       type: "security",
       email: true,
     });
@@ -282,14 +317,25 @@ export const setupTwoFactor = async (req, res) => {
 export const verifyTwoFactorSetup = async (req, res) => {
   try {
     const { token } = req.body;
-    const user = await User.findById(req.user._id).select("+twoFactorTempSecret");
+    const user = await User.findById(req.user._id).select(
+      "+twoFactorTempSecret",
+    );
     if (!user.twoFactorTempSecret) {
-      return res.status(400).json({ message: "No 2FA setup in progress. Please start setup again." });
+      return res
+        .status(400)
+        .json({
+          message: "No 2FA setup in progress. Please start setup again.",
+        });
     }
 
     const isValid = verifyTwoFactorToken(token, user.twoFactorTempSecret);
     if (!isValid) {
-      return res.status(400).json({ message: "Invalid code. Please check your authenticator app and try again." });
+      return res
+        .status(400)
+        .json({
+          message:
+            "Invalid code. Please check your authenticator app and try again.",
+        });
     }
 
     user.twoFactorSecret = user.twoFactorTempSecret;
@@ -299,12 +345,16 @@ export const verifyTwoFactorSetup = async (req, res) => {
 
     await notifyGeneral(user, {
       title: "Two-factor authentication enabled",
-      message: "2FA has been turned on for your account. You'll need your authenticator app to log in from now on.",
+      message:
+        "2FA has been turned on for your account. You'll need your authenticator app to log in from now on.",
       type: "security",
       email: true,
     });
 
-    return res.json({ message: "Two-factor authentication enabled", twoFactorEnabled: true });
+    return res.json({
+      message: "Two-factor authentication enabled",
+      twoFactorEnabled: true,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Could not verify 2FA setup" });
   }
@@ -325,12 +375,16 @@ export const disableTwoFactor = async (req, res) => {
 
     await notifyGeneral(user, {
       title: "Two-factor authentication disabled",
-      message: "2FA has been turned off for your account. If this wasn't you, contact support immediately.",
+      message:
+        "2FA has been turned off for your account. If this wasn't you, contact support immediately.",
       type: "security",
       email: true,
     });
 
-    return res.json({ message: "Two-factor authentication disabled", twoFactorEnabled: false });
+    return res.json({
+      message: "Two-factor authentication disabled",
+      twoFactorEnabled: false,
+    });
   } catch (error) {
     return res.status(500).json({ message: "Could not disable 2FA" });
   }
@@ -341,14 +395,32 @@ export const disableTwoFactor = async (req, res) => {
 export const uploadKyc = async (req, res) => {
   try {
     const {
-      documentType, documentNumber,
-      fullName, dateOfBirth, nationality, gender,
-      street, city, state, zip, country,
-      employmentStatus, occupation, employerName, annualIncome, sourceOfFunds,
+      documentType,
+      documentNumber,
+      fullName,
+      dateOfBirth,
+      nationality,
+      gender,
+      street,
+      city,
+      state,
+      zip,
+      country,
+      employmentStatus,
+      occupation,
+      employerName,
+      annualIncome,
+      sourceOfFunds,
     } = req.body;
 
-    if (!["drivers_license", "passport", "national_id", "state_id"].includes(documentType)) {
-      return res.status(400).json({ message: "Please select a valid document type" });
+    if (
+      !["drivers_license", "passport", "national_id", "state_id"].includes(
+        documentType,
+      )
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Please select a valid document type" });
     }
     if (!documentNumber) {
       return res.status(400).json({ message: "Document number is required" });
@@ -360,38 +432,51 @@ export const uploadKyc = async (req, res) => {
       return res.status(400).json({ message: "Selfie with ID is required" });
     }
     if (!fullName || !dateOfBirth || !nationality) {
-      return res.status(400).json({ message: "Please complete all required personal info fields" });
+      return res
+        .status(400)
+        .json({ message: "Please complete all required personal info fields" });
     }
     if (!street || !city || !state || !zip || !country) {
       return res.status(400).json({ message: "Please complete your address" });
     }
     if (!employmentStatus || !sourceOfFunds) {
-      return res.status(400).json({ message: "Please complete all required employment fields" });
+      return res
+        .status(400)
+        .json({ message: "Please complete all required employment fields" });
     }
 
     const userId = req.user._id;
 
-    const frontResult = await uploadBufferToCloudinary(req.files.frontId[0].buffer, {
-      folder: "welltrustbank/kyc",
-      publicId: `${userId}-front-${Date.now()}`,
-      isPdf: false,
-    });
+    const frontResult = await uploadBufferToCloudinary(
+      req.files.frontId[0].buffer,
+      {
+        folder: "pinecrestbank/kyc",
+        publicId: `${userId}-front-${Date.now()}`,
+        isPdf: false,
+      },
+    );
 
     let backUrl;
     if (req.files?.backId) {
-      const backResult = await uploadBufferToCloudinary(req.files.backId[0].buffer, {
-        folder: "welltrustbank/kyc",
-        publicId: `${userId}-back-${Date.now()}`,
-        isPdf: false,
-      });
+      const backResult = await uploadBufferToCloudinary(
+        req.files.backId[0].buffer,
+        {
+          folder: "pinecrestbank/kyc",
+          publicId: `${userId}-back-${Date.now()}`,
+          isPdf: false,
+        },
+      );
       backUrl = backResult.secure_url;
     }
 
-    const selfieResult = await uploadBufferToCloudinary(req.files.selfie[0].buffer, {
-      folder: "welltrustbank/kyc",
-      publicId: `${userId}-selfie-${Date.now()}`,
-      isPdf: false,
-    });
+    const selfieResult = await uploadBufferToCloudinary(
+      req.files.selfie[0].buffer,
+      {
+        folder: "pinecrestbank/kyc",
+        publicId: `${userId}-selfie-${Date.now()}`,
+        isPdf: false,
+      },
+    );
 
     const user = await User.findById(userId);
     user.kycDocumentType = documentType;
@@ -420,14 +505,19 @@ export const uploadKyc = async (req, res) => {
 
     await notifyGeneral(user, {
       title: "Identity verification submitted",
-      message: "Your KYC information has been submitted and is awaiting review by our team.",
+      message:
+        "Your KYC information has been submitted and is awaiting review by our team.",
       type: "account",
     });
 
-    return res.status(201).json({ message: "KYC submitted for review", kycStatus: user.kycStatus });
+    return res
+      .status(201)
+      .json({ message: "KYC submitted for review", kycStatus: user.kycStatus });
   } catch (error) {
     console.error("KYC upload error:", error);
-    return res.status(500).json({ message: "Could not submit KYC information" });
+    return res
+      .status(500)
+      .json({ message: "Could not submit KYC information" });
   }
 };
 
@@ -435,11 +525,13 @@ export const uploadKyc = async (req, res) => {
 export const uploadAvatar = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ message: "Please choose an image to upload" });
+      return res
+        .status(400)
+        .json({ message: "Please choose an image to upload" });
     }
 
     const result = await uploadBufferToCloudinary(req.file.buffer, {
-      folder: "welltrustbank/avatars",
+      folder: "pinecrestbank/avatars",
       publicId: `${req.user._id}-avatar-${Date.now()}`,
       isPdf: false,
     });
@@ -448,7 +540,10 @@ export const uploadAvatar = async (req, res) => {
     user.avatarUrl = result.secure_url;
     await user.save();
 
-    return res.json({ message: "Profile photo updated", avatarUrl: user.avatarUrl });
+    return res.json({
+      message: "Profile photo updated",
+      avatarUrl: user.avatarUrl,
+    });
   } catch (error) {
     console.error("Avatar upload error:", error);
     return res.status(500).json({ message: "Could not upload profile photo" });
@@ -496,7 +591,8 @@ export const getSpendingTrends = async (req, res) => {
     // Determine top 4 categories by total spend across the period; everything else -> "Other"
     const categoryTotals = {};
     raw.forEach((r) => {
-      categoryTotals[r._id.category] = (categoryTotals[r._id.category] || 0) + r.total;
+      categoryTotals[r._id.category] =
+        (categoryTotals[r._id.category] || 0) + r.total;
     });
     const topCategories = Object.entries(categoryTotals)
       .sort((a, b) => b[1] - a[1])
@@ -509,7 +605,10 @@ export const getSpendingTrends = async (req, res) => {
       const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
       months.push({
         key: `${d.getFullYear()}-${d.getMonth() + 1}`,
-        label: d.toLocaleDateString("en-US", { month: "short", year: "2-digit" }),
+        label: d.toLocaleDateString("en-US", {
+          month: "short",
+          year: "2-digit",
+        }),
         year: d.getFullYear(),
         month: d.getMonth() + 1,
       });
@@ -518,7 +617,9 @@ export const getSpendingTrends = async (req, res) => {
     const result = months.map(({ key, label, year, month }) => {
       const row = { month: label };
       let otherTotal = 0;
-      topCategories.forEach((cat) => { row[cat] = 0; });
+      topCategories.forEach((cat) => {
+        row[cat] = 0;
+      });
 
       raw
         .filter((r) => r._id.year === year && r._id.month === month)
@@ -534,7 +635,10 @@ export const getSpendingTrends = async (req, res) => {
       return row;
     });
 
-    return res.json({ trends: result, categories: [...topCategories, "Other"] });
+    return res.json({
+      trends: result,
+      categories: [...topCategories, "Other"],
+    });
   } catch (error) {
     console.error("Spending trends error:", error);
     return res.status(500).json({ message: "Could not fetch spending trends" });
@@ -547,7 +651,9 @@ export const downloadStatement = async (req, res) => {
     const month = parseInt(req.query.month);
     const year = parseInt(req.query.year);
     if (!month || !year || month < 1 || month > 12) {
-      return res.status(400).json({ message: "Valid month (1-12) and year are required" });
+      return res
+        .status(400)
+        .json({ message: "Valid month (1-12) and year are required" });
     }
 
     const user = await User.findById(req.user._id);
@@ -560,7 +666,7 @@ export const downloadStatement = async (req, res) => {
       createdAt: { $gte: startDate, $lt: endDate },
     };
 
-   const transactions = await Transaction.find(filter).sort({ createdAt: 1 });
+    const transactions = await Transaction.find(filter).sort({ createdAt: 1 });
 
     // Reconstruct the balance as it stood at the END of this period by
     // undoing every transaction that happened AFTER the period.
@@ -572,7 +678,10 @@ export const downloadStatement = async (req, res) => {
 
     let closingBalance = user.balance;
     laterTx.forEach((tx) => {
-      const isCreditToUser = tx.receiver?.toString() === user._id.toString() || tx.type === "adjustment_credit" || tx.type === "loan_disbursement";
+      const isCreditToUser =
+        tx.receiver?.toString() === user._id.toString() ||
+        tx.type === "adjustment_credit" ||
+        tx.type === "loan_disbursement";
       closingBalance += isCreditToUser ? -tx.amount : tx.amount;
     });
 
@@ -580,17 +689,30 @@ export const downloadStatement = async (req, res) => {
     // undoing every transaction that happened DURING the period itself.
     let openingBalance = closingBalance;
     transactions.forEach((tx) => {
-      const isCreditToUser = tx.receiver?.toString() === user._id.toString() || tx.type === "adjustment_credit" || tx.type === "loan_disbursement";
+      const isCreditToUser =
+        tx.receiver?.toString() === user._id.toString() ||
+        tx.type === "adjustment_credit" ||
+        tx.type === "loan_disbursement";
       openingBalance += isCreditToUser ? -tx.amount : tx.amount;
     });
 
-    const periodLabel = startDate.toLocaleDateString("en-US", { month: "long", year: "numeric" });
-    const filename = `WellTrustBank-Statement-${year}-${String(month).padStart(2, "0")}.pdf`;
+    const periodLabel = startDate.toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
+    });
+    const filename = `pinecrestbank-Statement-${year}-${String(month).padStart(2, "0")}.pdf`;
 
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
 
-    generateStatementPdf({ res, user, transactions, periodLabel, openingBalance, closingBalance });
+    generateStatementPdf({
+      res,
+      user,
+      transactions,
+      periodLabel,
+      openingBalance,
+      closingBalance,
+    });
   } catch (error) {
     console.error("Statement generation error:", error);
     return res.status(500).json({ message: "Could not generate statement" });

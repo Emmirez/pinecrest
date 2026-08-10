@@ -12,7 +12,7 @@ const slides = [
     image: "/global1.jpg",
     eyebrow: "Global by Design",
     title: "Hold and send money in 7 currencies",
-    text: "USD, GBP, EUR, CAD, AUD, JPY, and CHF — Well Trust Bank was built for a borderless life.",
+    text: "USD, GBP, EUR, CAD, AUD, JPY, and CHF — Pinecrest Bank was built for a borderless life.",
   },
   {
     image: "/wellbank5.jpg",
@@ -26,7 +26,10 @@ const HeroCarousel = () => {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setActive((a) => (a + 1) % slides.length), 5500);
+    const timer = setInterval(
+      () => setActive((a) => (a + 1) % slides.length),
+      5500,
+    );
     return () => clearInterval(timer);
   }, []);
 
@@ -39,14 +42,22 @@ const HeroCarousel = () => {
           key={i}
           className={`absolute inset-0 transition-opacity duration-1000 ${i === active ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         >
-          <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
+          <img
+            src={slide.image}
+            alt={slide.title}
+            className="w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/30 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
             <span className="inline-block text-gold-300 bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold tracking-wide uppercase px-3 py-1 rounded-full mb-4">
               {slide.eyebrow}
             </span>
-            <h2 className="text-white text-2xl md:text-4xl font-bold max-w-xl leading-tight">{slide.title}</h2>
-            <p className="text-slate-200 mt-3 max-w-md text-sm md:text-base">{slide.text}</p>
+            <h2 className="text-white text-2xl md:text-4xl font-bold max-w-xl leading-tight">
+              {slide.title}
+            </h2>
+            <p className="text-slate-200 mt-3 max-w-md text-sm md:text-base">
+              {slide.text}
+            </p>
           </div>
         </div>
       ))}

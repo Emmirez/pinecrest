@@ -45,13 +45,13 @@ const Footer = () => {
             <div className="flex items-center gap-2.5 mb-4">
               <img
                 src="/logo.png"
-                alt="Well Trust Bank"
+                alt="Pinecrest Bank"
                 className="h-9 w-auto"
                 onError={(e) => (e.target.style.display = "none")}
               />
               <span className="font-display font-bold text-lg tracking-tight leading-none">
-                <span className="text-white">Well</span>{" "}
-                <span className="text-gold-400">Trust Bank</span>
+                <span className="text-white">Pinecrest</span>{" "}
+                <span className="text-gold-400">Bank</span>
               </span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
@@ -137,14 +137,14 @@ const Footer = () => {
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-6 pt-6 border-t border-white/10">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Well Trust Bank. All rights reserved.
+            © {new Date().getFullYear()} Pinecrest Bank. All rights reserved.
           </p>
           <p className="text-xs text-slate-500">
-            Well Trust Bank, Member FDIC. All deposit accounts are insured by
-            the Federal Deposit Insurance Corporation (FDIC) to the maximum
-            amount permitted by law. Balances, transfers, and transaction data
-            are provided for informational purposes only and may not reflect
-            recent or pending activity.
+            Pinecrest Bank, Member FDIC. All deposit accounts are insured by the
+            Federal Deposit Insurance Corporation (FDIC) to the maximum amount
+            permitted by law. Balances, transfers, and transaction data are
+            provided for informational purposes only and may not reflect recent
+            or pending activity.
           </p>
         </div>
       </div>

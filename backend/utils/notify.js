@@ -7,7 +7,10 @@ import { getIO } from "../socket.js";
  * Sends a transaction notification across email, SMS, and in-app channels,
  * and pushes a real-time event via Socket.io if the user is connected.
  */
-export const notifyTransaction = async (user, { action, amount, currency, balance, reference, date }) => {
+export const notifyTransaction = async (
+  user,
+  { action, amount, currency, balance, reference, date },
+) => {
   const title = `Transaction: ${action} ${currency} ${amount}`;
   const message = `Your account was ${action} ${currency} ${amount}. New balance: ${currency} ${balance}. Ref: ${reference}`;
 
@@ -55,7 +58,7 @@ export const notifyTransaction = async (user, { action, amount, currency, balanc
   if (user.notificationPrefs?.sms !== false && user.phone) {
     await sendSms({
       to: user.phone,
-      body: `Well Trust Bank: ${action} ${currency}${amount}. Bal: ${currency}${balance}. Ref: ${reference}`,
+      body: `Pinecrest Bank: ${action} ${currency}${amount}. Bal: ${currency}${balance}. Ref: ${reference}`,
     });
   }
 
@@ -65,7 +68,10 @@ export const notifyTransaction = async (user, { action, amount, currency, balanc
 /**
  * Generic in-app-only notification (e.g. account approved, security alert)
  */
-export const notifyGeneral = async (user, { title, message, type = "general", email = false, sms = false }) => {
+export const notifyGeneral = async (
+  user,
+  { title, message, type = "general", email = false, sms = false },
+) => {
   const notification = await Notification.create({
     user: user._id,
     title,

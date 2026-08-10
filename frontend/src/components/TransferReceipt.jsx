@@ -33,7 +33,7 @@ const TransferReceipt = ({ mode, transaction, recipient, onNewTransfer }) => {
 
   const copyDetails = () => {
     const text = [
-      `Well Trust Bank — Transfer Receipt`,
+      `Pinecrest Bank — Transfer Receipt`,
       `Reference: ${transaction.reference}`,
       `Amount: ${formatMoney(transaction.amount, transaction.currency)}`,
       recipient ? `Recipient: ${recipient}` : null,
@@ -113,7 +113,7 @@ const TransferReceipt = ({ mode, transaction, recipient, onNewTransfer }) => {
 
         <div className="mt-5 pt-4 border-t border-dashed border-slate-200 text-center">
           <p className="text-[11px] text-slate-400">
-            Well Trust Bank · Keep this receipt for your records
+            Pinecrest Bank · Keep this receipt for your records
           </p>
         </div>
       </div>

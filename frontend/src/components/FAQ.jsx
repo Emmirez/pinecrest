@@ -4,7 +4,7 @@ import { ChevronDown, MessageCircleQuestion, ArrowRight } from "lucide-react";
 
 const faqs = [
   {
-    q: "How do I open a Well Trust Bank account?",
+    q: "How do I open a Pinecrest Bank account?",
     a: 'Click "Open an Account," fill in your personal details, address, account type, and currency, then set a password and a 4-digit transaction PIN. It takes about five minutes.',
   },
   {
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "Is my money insured?",
-    a: "Well Trust Bank is a portfolio demo project and is not a real, chartered, or FDIC-insured bank. No real funds are held or insured on this platform.",
+    a: "Pinecrest Bank is a portfolio demo project and is not a real, chartered, or FDIC-insured bank. No real funds are held or insured on this platform.",
   },
   {
     q: "How do I get notified about transactions?",
@@ -75,7 +75,7 @@ const FAQ = () => {
         <div className="rounded-xl3 overflow-hidden shadow-card relative h-[320px] md:h-full min-h-[380px]">
           <img
             src="/global.jpg"
-            alt="Well Trust Bank support team"
+            alt="Pinecrest Bank support team"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-900/95 via-navy-900/40 to-transparent" />

@@ -73,7 +73,7 @@ const AccountDetailsCard = ({ user }) => {
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-1 mt-5">
           Bank Details
         </p>
-        <Row label="Bank Name" value="Well Trust Bank" />
+        <Row label="Bank Name" value="Pinecrest Bank" />
         <Row label="Routing Number" value={user?.routingNumber} copyable />
         <Row label="SWIFT / BIC Code" value={WELL_TRUST_SWIFT} copyable />
         <Row label="Bank Address" value={WELL_TRUST_ADDRESS} />

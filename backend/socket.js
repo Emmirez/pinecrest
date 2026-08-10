@@ -6,8 +6,8 @@ let io = null;
 export const initSocket = (httpServer) => {
   const allowedOrigins = [
     process.env.CLIENT_URL,
-    "https://welltrustapp.com",
-    "https://www.welltrustapp.com",
+    "https://pinecrestpay.com",
+    "https://www.pinecrestpay.com",
   ].filter(Boolean);
 
   io = new Server(httpServer, {

@@ -13,7 +13,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const contactInfo = [
-  { icon: Mail, title: "Email", detail: "support@welltrustbank.com" },
+  { icon: Mail, title: "Email", detail: "support@pinecrestbank.com" },
   { icon: Phone, title: "Phone", detail: "+1 (863) 333-9415" },
   {
     icon: MapPin,
@@ -151,7 +151,7 @@ const ContactUs = () => {
         <div className="md:col-span-2 rounded-xl3 overflow-hidden shadow-card h-[320px] md:h-full min-h-[380px]">
           <img
             src="/team1.jpg"
-            alt="Well Trust Bank support team ready to help"
+            alt="Pinecrest Bank support team ready to help"
             className="w-full h-full object-cover"
           />
         </div>

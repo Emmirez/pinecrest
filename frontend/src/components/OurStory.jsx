@@ -9,7 +9,7 @@ const OurStory = () => {
         <div className="rounded-xl3 overflow-hidden shadow-card h-[380px] md:h-[440px]">
           <img
             src="https://images.unsplash.com/photo-1556740758-90de374c12ad?q=80&w=1200&auto=format&fit=crop"
-            alt="Well Trust Bank team at work"
+            alt="Pinecrest Bank team at work"
             className="w-full h-full object-cover"
           />
         </div>
@@ -29,7 +29,7 @@ const OurStory = () => {
         <div className="absolute bottom-0 right-4 sm:right-8 h-36 w-28 sm:h-44 sm:w-36 rounded-2xl overflow-hidden border-4 border-white shadow-card">
           <img
             src="/team1.jpg"
-            alt="Well Trust Bank community volunteering"
+            alt="Pinecrest Bank community volunteering"
             className="w-full h-full object-cover"
           />
         </div>
@@ -44,7 +44,7 @@ const OurStory = () => {
           Built by bankers who got tired of legacy banking
         </h2>
         <p className="text-slate-500 mt-4 leading-relaxed">
-          Well Trust Bank started with a simple question: why does opening an
+          Pinecrest Bank started with a simple question: why does opening an
           account still feel like 1998? We rebuilt the experience from scratch —
           real approvals, real transfers, and real people reviewing every
           application, without the paperwork or the wait.

@@ -19,7 +19,8 @@ const ForgotPassword = () => {
 
   const requestReset = async (e) => {
     e.preventDefault();
-    setError(""); setInfo("");
+    setError("");
+    setInfo("");
     setLoading(true);
     try {
       const { data } = await api.post("/auth/forgot-password", { email });
@@ -38,8 +39,10 @@ const ForgotPassword = () => {
   const submitReset = async (e) => {
     e.preventDefault();
     setError("");
-    if (newPassword !== confirmPassword) return setError("Passwords do not match");
-    if (newPassword.length < 8) return setError("Password must be at least 8 characters");
+    if (newPassword !== confirmPassword)
+      return setError("Passwords do not match");
+    if (newPassword.length < 8)
+      return setError("Password must be at least 8 characters");
     setLoading(true);
     try {
       await api.post("/auth/reset-password", { userId, otp, newPassword });
@@ -53,30 +56,48 @@ const ForgotPassword = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      <Header  />
+      <Header />
 
       <div className="flex-1 flex items-center justify-center px-4 py-14">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <img src="/logo.png" alt="Well Trust Bank" className="h-12 mx-auto mb-4" onError={(e) => (e.target.style.display = "none")} />
+            <img
+              src="/logo.png"
+              alt="Pinecrest Bank"
+              className="h-12 mx-auto mb-4"
+              onError={(e) => (e.target.style.display = "none")}
+            />
             <h1 className="text-2xl font-bold text-navy-900">
               {step === "request" && "Forgot your password?"}
               {step === "reset" && "Reset your password"}
               {step === "done" && "Password reset"}
             </h1>
             <p className="text-slate-400 text-sm mt-1">
-              {step === "request" && "Enter your email and we'll send you a reset code."}
-              {step === "reset" && "Enter the code we sent you and choose a new password."}
+              {step === "request" &&
+                "Enter your email and we'll send you a reset code."}
+              {step === "reset" &&
+                "Enter the code we sent you and choose a new password."}
               {step === "done" && "You can now log in with your new password."}
             </p>
           </div>
 
           {step === "request" && (
             <form onSubmit={requestReset} className="card p-6 md:p-8 space-y-4">
-              {error && <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">{error}</div>}
-              {info && <div className="bg-emerald-50 text-emerald-600 text-sm rounded-xl px-4 py-3">{info}</div>}
+              {error && (
+                <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">
+                  {error}
+                </div>
+              )}
+              {info && (
+                <div className="bg-emerald-50 text-emerald-600 text-sm rounded-xl px-4 py-3">
+                  {info}
+                </div>
+              )}
               <div className="relative">
-                <Mail size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <Mail
+                  size={17}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+                />
                 <input
                   type="email"
                   required
@@ -86,27 +107,44 @@ const ForgotPassword = () => {
                   className="input-field !pl-10"
                 />
               </div>
-              <button type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2">
-                {loading ? "Sending..." : "Send Reset Code"} <ArrowRight size={16} />
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary w-full flex items-center justify-center gap-2"
+              >
+                {loading ? "Sending..." : "Send Reset Code"}{" "}
+                <ArrowRight size={16} />
               </button>
             </form>
           )}
 
           {step === "reset" && (
             <form onSubmit={submitReset} className="card p-6 md:p-8 space-y-4">
-              {error && <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">{error}</div>}
+              {error && (
+                <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">
+                  {error}
+                </div>
+              )}
               <div className="relative">
-                <KeyRound size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <KeyRound
+                  size={17}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+                />
                 <input
                   required
                   placeholder="6-digit code"
                   value={otp}
-                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                  onChange={(e) =>
+                    setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+                  }
                   className="input-field !pl-10 tracking-widest text-center"
                 />
               </div>
               <div className="relative">
-                <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <Lock
+                  size={17}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+                />
                 <input
                   type="password"
                   required
@@ -117,7 +155,10 @@ const ForgotPassword = () => {
                 />
               </div>
               <div className="relative">
-                <Lock size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                <Lock
+                  size={17}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+                />
                 <input
                   type="password"
                   required
@@ -127,8 +168,13 @@ const ForgotPassword = () => {
                   className="input-field !pl-10"
                 />
               </div>
-              <button type="submit" disabled={loading} className="btn-primary w-full flex items-center justify-center gap-2">
-                {loading ? "Resetting..." : "Reset Password"} <ArrowRight size={16} />
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary w-full flex items-center justify-center gap-2"
+              >
+                {loading ? "Resetting..." : "Reset Password"}{" "}
+                <ArrowRight size={16} />
               </button>
             </form>
           )}
@@ -138,14 +184,24 @@ const ForgotPassword = () => {
               <div className="h-14 w-14 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 size={26} />
               </div>
-              <p className="text-slate-500 text-sm mb-6">Your password has been changed successfully.</p>
-              <button onClick={() => navigate("/login")} className="btn-primary w-full">Go to Login</button>
+              <p className="text-slate-500 text-sm mb-6">
+                Your password has been changed successfully.
+              </p>
+              <button
+                onClick={() => navigate("/login")}
+                className="btn-primary w-full"
+              >
+                Go to Login
+              </button>
             </div>
           )}
 
           {step === "request" && (
             <p className="text-center text-sm text-slate-400 mt-6">
-              Remember your password? <Link to="/login" className="text-navy font-semibold">Log in</Link>
+              Remember your password?{" "}
+              <Link to="/login" className="text-navy font-semibold">
+                Log in
+              </Link>
             </p>
           )}
         </div>

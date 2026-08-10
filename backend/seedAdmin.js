@@ -10,7 +10,7 @@ dotenv.config();
 const run = async () => {
   await connectDB();
 
-  const email = process.env.ADMIN_EMAIL || "admin@welltrustbank.com";
+  const email = process.env.ADMIN_EMAIL || "admin@pinecrestbank.com";
   const existing = await User.findOne({ email });
   if (existing) {
     console.log(`Admin already exists: ${email}`);
@@ -43,7 +43,9 @@ const run = async () => {
     isPhoneVerified: true,
   });
 
-  console.log(`Admin created: ${admin.email} (password: ${process.env.ADMIN_PASSWORD || "ChangeMe123!"})`);
+  console.log(
+    `Admin created: ${admin.email} (password: ${process.env.ADMIN_PASSWORD || "ChangeMe123!"})`,
+  );
   process.exit(0);
 };
 

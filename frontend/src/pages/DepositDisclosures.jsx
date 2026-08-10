@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 const sections = [
   {
     title: "1. Account Types Covered",
-    body: "This disclosure applies to all deposit accounts offered by Well Trust Bank: Checking, Savings, Business, and Money Market accounts. Each account type carries its own terms regarding interest, minimum balance, and access, as summarized below.",
+    body: "This disclosure applies to all deposit accounts offered by Pinecrest Bank: Checking, Savings, Business, and Money Market accounts. Each account type carries its own terms regarding interest, minimum balance, and access, as summarized below.",
   },
   {
     title: "2. Interest Rate Information",
@@ -18,19 +18,19 @@ const sections = [
   },
   {
     title: "4. Fee Schedule",
-    body: "Well Trust Bank does not charge monthly maintenance fees on Checking, Savings, or Money Market accounts. There are no fees for standard internal transfers between Well Trust Bank accounts. External transfers may carry a disclosed fee at the time of the transaction, shown to you before you confirm the transfer.",
+    body: "Pinecrest Bank does not charge monthly maintenance fees on Checking, Savings, or Money Market accounts. There are no fees for standard internal transfers between Pinecrest Bank accounts. External transfers may carry a disclosed fee at the time of the transaction, shown to you before you confirm the transfer.",
   },
   {
     title: "5. Funds Availability",
-    body: "Internal transfers between Well Trust Bank accounts are typically reflected in both the sender's and recipient's balance immediately upon completion. External transfers to other financial institutions may take one to three business days to be reflected in the receiving account, depending on the receiving bank's own processing timelines.",
+    body: "Internal transfers between Pinecrest Bank accounts are typically reflected in both the sender's and recipient's balance immediately upon completion. External transfers to other financial institutions may take one to three business days to be reflected in the receiving account, depending on the receiving bank's own processing timelines.",
   },
   {
     title: "6. Overdrafts",
-    body: "Well Trust Bank does not permit transactions that would take an account balance below zero. Internal and external transfer requests that exceed the available balance are declined at the time of the request, and no overdraft fees are charged as a result.",
+    body: "Pinecrest Bank does not permit transactions that would take an account balance below zero. Internal and external transfer requests that exceed the available balance are declined at the time of the request, and no overdraft fees are charged as a result.",
   },
   {
     title: "7. Account Closure",
-    body: "You may request to close your account at any time by contacting support, provided your account balance is at or near zero or you have arranged for the remaining balance to be transferred out. Well Trust Bank reserves the right to close an account that has been inactive for an extended period or that violates the Online Banking Service Agreement, with notice provided where required by law.",
+    body: "You may request to close your account at any time by contacting support, provided your account balance is at or near zero or you have arranged for the remaining balance to be transferred out. Pinecrest Bank reserves the right to close an account that has been inactive for an extended period or that violates the Online Banking Service Agreement, with notice provided where required by law.",
   },
   {
     title: "8. Error Resolution",
@@ -38,11 +38,11 @@ const sections = [
   },
   {
     title: "9. Statements",
-    body: "Account statements are available electronically at any time from your Transactions page. Well Trust Bank does not mail paper statements; by opening an account, you consent to receive statements and disclosures electronically.",
+    body: "Account statements are available electronically at any time from your Transactions page. Pinecrest Bank does not mail paper statements; by opening an account, you consent to receive statements and disclosures electronically.",
   },
   {
     title: "10. Regulatory Note",
-    body: "Well Trust Bank is a portfolio demonstration project built to showcase full-stack banking application design. It is not a chartered bank, and deposits shown on this platform are not insured by the FDIC or any government agency.",
+    body: "Pinecrest Bank is a portfolio demonstration project built to showcase full-stack banking application design. It is not a chartered bank, and deposits shown on this platform are not insured by the FDIC or any government agency.",
   },
 ];
 
@@ -74,7 +74,7 @@ const DepositDisclosures = () => (
       <div className="card p-6 md:p-10">
         <p className="text-slate-500 leading-relaxed mb-8">
           This Account Disclosure describes the key terms and conditions of your
-          Well Trust Bank deposit account, including interest rates, fees,
+          Pinecrest Bank deposit account, including interest rates, fees,
           balance requirements, and funds availability. Please read this
           disclosure carefully and retain it for your records. For complete
           details about your account, including our full Fee Schedule and Funds

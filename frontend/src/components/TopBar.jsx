@@ -24,7 +24,7 @@ const TopBar = ({
         <Link to="/" className="flex items-center gap-2">
           <img
             src="/logo.png"
-            alt="Well Trust Bank"
+            alt="Pinecrest Bank"
             className="h-8 w-auto"
             onError={(e) => (e.target.style.display = "none")}
           />
