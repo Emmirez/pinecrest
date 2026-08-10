@@ -375,7 +375,6 @@ const Landing = () => {
 
       {/* FOOTER */}
       <Footer />
-      <FloatingWhatsApp />
     </div>
   );
 };

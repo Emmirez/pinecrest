@@ -15,7 +15,7 @@ const formatMoney = (amount, currency = "USD") =>
   );
 
 const typeLabels = {
-  transfer_internal: "Well Trust Transfer",
+  transfer_internal: "Internal Transfer",
   transfer_external: "External Bank Transfer",
   transfer_international: "International Transfer",
   adjustment_credit: "Credit",
@@ -113,7 +113,7 @@ const TransactionDetailModal = ({ transactionId, currentUserId, onClose }) => {
                 </span>
               </div>
 
-             {/* Core details */}
+              {/* Core details */}
               <div className="mt-2">
                 <Row label="Reference" value={tx.reference} />
                 <Row
@@ -194,8 +194,6 @@ const TransactionDetailModal = ({ transactionId, currentUserId, onClose }) => {
                   <Row label="Bank Address" value={tx.externalBankAddress} />
                 </div>
               )}
-
-             
             </>
           ) : null}
         </div>

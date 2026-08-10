@@ -148,7 +148,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      <FloatingWhatsApp />
+     
     </footer>
   );
 };

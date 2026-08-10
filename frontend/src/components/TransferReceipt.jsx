@@ -8,7 +8,7 @@ const formatMoney = (amount, currency = "USD") =>
   );
 
 const modeLabels = {
-  internal: "Well Trust Transfer",
+  internal: "Internal Transfer",
   external: "Local Bank Transfer",
   international: "International Wire",
   zelle: "Zelle",
