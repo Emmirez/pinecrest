@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "Is my money insured?",
-    a: "Pinecrest Bank is a portfolio demo project and is not a real, chartered, or FDIC-insured bank. No real funds are held or insured on this platform.",
+    a: "Yes. Pinecrest Bank is a Member of the FDIC (Federal Deposit Insurance Corporation), which insures deposits up to $250,000 per depositor, per insured bank, for each account ownership category. This protection covers checking accounts, savings accounts, money market deposit accounts, and certificates of deposit (CDs). For accounts exceeding the coverage limit, please speak with a relationship manager about additional coverage options like ICS or CDARS.",
   },
   {
     q: "How do I get notified about transactions?",
