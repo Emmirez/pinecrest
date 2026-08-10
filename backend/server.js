@@ -57,6 +57,13 @@ app.get("/api/health", (req, res) =>
   res.json({ status: "ok", bank: "Pinecrest Bank API" }),
 );
 
+app.get("/", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "Pinecrest Bank API is running",
+  });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
