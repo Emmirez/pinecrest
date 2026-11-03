@@ -15,7 +15,7 @@ const Sidebar = ({ items, footerNote }) => {
           onError={(e) => (e.target.style.display = "none")}
         />
         <span className="font-display font-bold text-lg text-navy leading-tight">
-          Well Trust
+          Pinecrest
           <br className="hidden" /> Bank
         </span>
       </div>
@@ -59,7 +59,7 @@ const Sidebar = ({ items, footerNote }) => {
             {user?.firstName} {user?.lastName}
           </p>
           <p className="text-xs text-slate-400 truncate">
-            {user?.role === "admin" ? "Administrator" : "Well Trust Member"}
+            {user?.role === "admin" ? "Administrator" : "Pinecrest Member"}
           </p>
         </div>
         <button

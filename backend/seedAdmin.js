@@ -18,7 +18,7 @@ const run = async () => {
   }
 
   const admin = await User.create({
-    firstName: "Well Trust",
+    firstName: "Pinecrest",
     lastName: "Admin",
     email,
     phone: "+10000000000",

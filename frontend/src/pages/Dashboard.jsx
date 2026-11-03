@@ -142,40 +142,44 @@ const Dashboard = () => {
           </div>
 
           {/* Quick actions */}
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
-          {[
-            { icon: Send, label: "Send", to: "/dashboard/transfer" },
-            {
-              icon: HandCoins,
-              label: "Request",
-              to: "/dashboard/requests",
-            },
-            { icon: FileText, label: "Bill Pay", to: "/dashboard/bills" },
-            { icon: Receipt, label: "History", to: "/dashboard/transactions" },
-            { icon: ScanLine, label: "Cards", to: "/dashboard/cards" },
-          ].map(({ icon: Icon, label, to }) => (
-            <Link
-              key={label}
-              to={to}
-              className="card p-4 flex flex-col items-center gap-2 hover:-translate-y-0.5 hover:shadow-card transition-all"
-            >
-              <div className="h-10 w-10 rounded-xl bg-navy-50 text-navy flex items-center justify-center">
-                <Icon size={18} />
-              </div>
-              <span className="text-xs font-medium text-slate-500">
-                {label}
-              </span>
-            </Link>
-          ))}
-        </div>
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+            {[
+              { icon: Send, label: "Send", to: "/dashboard/transfer" },
+              {
+                icon: HandCoins,
+                label: "Request",
+                to: "/dashboard/requests",
+              },
+              { icon: FileText, label: "Bill Pay", to: "/dashboard/bills" },
+              {
+                icon: Receipt,
+                label: "History",
+                to: "/dashboard/transactions",
+              },
+              { icon: ScanLine, label: "Cards", to: "/dashboard/cards" },
+            ].map(({ icon: Icon, label, to }) => (
+              <Link
+                key={label}
+                to={to}
+                className="card p-4 flex flex-col items-center gap-2 hover:-translate-y-0.5 hover:shadow-card transition-all"
+              >
+                <div className="h-10 w-10 rounded-xl bg-navy-50 text-navy flex items-center justify-center">
+                  <Icon size={18} />
+                </div>
+                <span className="text-xs font-medium text-slate-500">
+                  {label}
+                </span>
+              </Link>
+            ))}
+          </div>
 
-         <AccountLimitsCard currency={currency} />
+          <AccountLimitsCard currency={currency} />
 
-         {/* Virtual card */}
-        <Link
-          to="/dashboard/cards"
-          className="block rounded-xl3 bg-gradient-to-br from-navy-600 to-navy-800 p-6 text-white shadow-card relative overflow-hidden flex flex-col justify-between min-h-[220px] hover:opacity-95 transition-opacity"
-        >
+          {/* Virtual card */}
+          <Link
+            to="/dashboard/cards"
+            className="block rounded-xl3 bg-gradient-to-br from-navy-600 to-navy-800 p-6 text-white shadow-card relative overflow-hidden flex flex-col justify-between min-h-[220px] hover:opacity-95 transition-opacity"
+          >
             {/* Card brand badge */}
             <div className="absolute right-6 top-6 flex items-center gap-3">
               <svg
@@ -196,7 +200,7 @@ const Dashboard = () => {
 
             <div>
               <p className="text-slate-300 text-xs uppercase tracking-wide">
-                Well Trust Debit Card
+                Pinecrest Debit Card
               </p>
               <p className="text-xl md:text-2xl font-semibold tracking-widest mt-4">
                 •••• •••• •••• {data?.user?.accountNumber?.slice(-4) || "0000"}
@@ -212,20 +216,17 @@ const Dashboard = () => {
                   {data?.user?.firstName} {data?.user?.lastName}
                 </p>
               </div>
-            <div>
-              <p className="text-[10px] text-slate-300 uppercase">
-                Routing No.
-              </p>
-              <p className="text-sm font-medium">
-                {data?.user?.routingNumber}
-              </p>
+              <div>
+                <p className="text-[10px] text-slate-300 uppercase">
+                  Routing No.
+                </p>
+                <p className="text-sm font-medium">
+                  {data?.user?.routingNumber}
+                </p>
+              </div>
             </div>
-          </div>
-        </Link> 
+          </Link>
         </div>
-
-        
-       
 
         <SendMoney />
         <KycReminderBanner />

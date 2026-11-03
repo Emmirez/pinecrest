@@ -5,7 +5,7 @@ const options = [
   //   {
   //     key: "internal",
   //     label: "Internal Transfer",
-  //     desc: "Send to another Well Trust account",
+  //     desc: "Send to another Pinecrest account",
   //     icon: Landmark,
   //     bg: "bg-navy-800",
   //     to: "/dashboard/transfer?mode=internal",

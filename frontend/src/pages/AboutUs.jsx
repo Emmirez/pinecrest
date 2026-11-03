@@ -219,7 +219,7 @@ const AboutUs = () => {
       <section className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-20">
         <div className="max-w-xl mb-12">
           <span className="text-xs font-semibold uppercase tracking-wide text-navy-400">
-            Behind Well Trust
+            Behind Pinecrest
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-navy-900 mt-2">
             Where the work actually happens

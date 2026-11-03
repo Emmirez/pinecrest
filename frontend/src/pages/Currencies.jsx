@@ -125,7 +125,7 @@ const Currencies = () => (
         <ul className="space-y-3">
           {[
             "Your account currency is fixed at signup and shown on every statement and transfer.",
-            "Transfers between Well Trust accounts currently work only between matching currencies.",
+            "Transfers between Pinecrest accounts currently work only between matching currencies.",
             "Cross-currency conversion is on our roadmap — for now, pick the currency you use most.",
           ].map((item) => (
             <li

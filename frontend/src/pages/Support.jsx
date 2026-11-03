@@ -51,7 +51,7 @@ const faqs = [
   {
     icon: ArrowLeftRight,
     q: "How to make a transfer?",
-    a: "Go to Transfer from the sidebar or Dashboard, choose Well Trust, Local, International, Zelle, or PayPal, fill in the recipient details and amount, then confirm with your 4-digit transaction PIN.",
+    a: "Go to Transfer from the sidebar or Dashboard, choose Pinecrest, Local, International, Zelle, or PayPal, fill in the recipient details and amount, then confirm with your 4-digit transaction PIN.",
   },
   {
     icon: CreditCard,
@@ -71,7 +71,7 @@ const faqs = [
   {
     icon: PlusCircle,
     q: "How to add funds to my account?",
-    a: "You can add funds to your Pinecrest Bank account through multiple channels. Internal transfers between Well Trust accounts are instant. External transfers via ACH typically take 1-3 business days to process. You can also receive funds from approved Loans, Grants, or Tax Refund claims — all available in your dashboard menu.",
+    a: "You can add funds to your Pinecrest Bank account through multiple channels. Internal transfers between Pinecrest accounts are instant. External transfers via ACH typically take 1-3 business days to process. You can also receive funds from approved Loans, Grants, or Tax Refund claims — all available in your dashboard menu.",
   },
   {
     icon: TrendingUp,
@@ -191,7 +191,7 @@ const Support = () => {
                   <p
                     className={`text-[10px] mt-1 ${m.sender === "user" ? "text-slate-300" : "text-slate-400"}`}
                   >
-                    {m.sender === "user" ? "You" : "Well Trust Support"} ·{" "}
+                    {m.sender === "user" ? "You" : "Pinecrest Support"} ·{" "}
                     {new Date(m.createdAt).toLocaleString("en-US")}
                   </p>
                 </div>

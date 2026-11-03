@@ -278,7 +278,7 @@ const Beneficiaries = () => {
                 </div>
                 {b.isInternal && (
                   <span className="text-[10px] bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full font-medium shrink-0">
-                    Well Trust
+                    Pinecrest
                   </span>
                 )}
                 {b.isInternational && (

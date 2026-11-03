@@ -46,6 +46,7 @@ cp .env.example .env
 ```
 
 Fill in `.env`:
+
 - `MONGO_URI` — your MongoDB Atlas connection string
 - `JWT_SECRET` / `JWT_REFRESH_SECRET` — any long random strings
 - `BREVO_API_KEY`, `BREVO_SENDER_EMAIL` — from your Brevo account
@@ -92,7 +93,7 @@ The app runs on `http://localhost:5173`.
 3. **Pending review** — account sits in `pending` status until an admin
    approves it from `/admin/approvals`.
 4. **Login** — only works once verified AND approved.
-5. **Bank** — transfers (internal to another Well Trust account, or external
+5. **Bank** — transfers (internal to another Pinecrest account, or external
    to any other bank, simulated) debit/credit real balances in MongoDB and
    fire email + SMS + in-app notifications via Socket.io.
 6. **Admin** — can search/filter users, approve/reject/suspend/freeze
@@ -102,6 +103,7 @@ The app runs on `http://localhost:5173`.
 ## Deployment
 
 **Backend → Render**
+
 1. Push `backend/` to GitHub (or the whole repo).
 2. New Web Service on Render, root directory `backend`.
 3. Build command: `npm install` · Start command: `npm start`.
@@ -109,6 +111,7 @@ The app runs on `http://localhost:5173`.
 5. Set `CLIENT_URL` to your deployed Vercel URL once you have it.
 
 **Frontend → Vercel**
+
 1. Import the repo, root directory `frontend`.
 2. Framework preset: Vite.
 3. Add `VITE_API_URL` and `VITE_SOCKET_URL` pointing to your Render backend URL.
@@ -118,7 +121,7 @@ The app runs on `http://localhost:5173`.
 This is a portfolio project — it is **not** a chartered or FDIC-insured
 bank. External transfers are simulated (they debit the sender but don't
 move real money anywhere). Multi-currency transfers only work between two
-accounts holding the *same* currency for now (cross-currency conversion is a
+accounts holding the _same_ currency for now (cross-currency conversion is a
 good phase-2 feature). SSNs are hashed and only the last 4 digits are
 stored in plain form, matching how real banks display them back to users.
 

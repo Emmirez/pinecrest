@@ -242,7 +242,7 @@ const Transfer = () => {
                 />
                 <input
                   required
-                  placeholder="Recipient's Well Trust account number"
+                  placeholder="Recipient's Pinecrest account number"
                   value={form.receiverAccountNumber}
                   onChange={(e) =>
                     update("receiverAccountNumber", e.target.value)

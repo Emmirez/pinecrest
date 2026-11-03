@@ -18,36 +18,95 @@ import { useUserMenu } from "../components/DashboardLayout";
 // Real card brand SVG logos
 const CardBrandLogos = {
   visa: (
-    <svg viewBox="0 0 80 26" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 80 26"
+      className="h-8 w-auto"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <rect width="80" height="26" rx="4" fill="#1434CB" />
-      <text x="10" y="18" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="14" fill="white" letterSpacing="2">
+      <text
+        x="10"
+        y="18"
+        fontFamily="Arial, sans-serif"
+        fontWeight="bold"
+        fontSize="14"
+        fill="white"
+        letterSpacing="2"
+      >
         VISA
       </text>
     </svg>
   ),
   mastercard: (
-    <svg viewBox="0 0 60 40" className="h-9 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 60 40"
+      className="h-9 w-auto"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <rect width="60" height="40" rx="4" fill="white" />
       <circle cx="22" cy="20" r="14" fill="#EB001B" />
       <circle cx="38" cy="20" r="14" fill="#F79E1B" />
-      <circle cx="30" cy="20" r="14" fill="none" stroke="#FF5F00" strokeWidth="2" />
+      <circle
+        cx="30"
+        cy="20"
+        r="14"
+        fill="none"
+        stroke="#FF5F00"
+        strokeWidth="2"
+      />
     </svg>
   ),
   verve: (
-    <svg viewBox="0 0 80 26" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 80 26"
+      className="h-8 w-auto"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <rect width="80" height="26" rx="4" fill="#1A1A2E" />
-      <text x="10" y="18" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="14" fill="#00BFFF" letterSpacing="2">
+      <text
+        x="10"
+        y="18"
+        fontFamily="Arial, sans-serif"
+        fontWeight="bold"
+        fontSize="14"
+        fill="#00BFFF"
+        letterSpacing="2"
+      >
         VERVE
       </text>
     </svg>
   ),
   amex: (
-    <svg viewBox="0 0 80 26" className="h-8 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 80 26"
+      className="h-8 w-auto"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <rect width="80" height="26" rx="4" fill="#006FCF" />
-      <text x="8" y="18" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="10" fill="white" letterSpacing="1">
+      <text
+        x="8"
+        y="18"
+        fontFamily="Arial, sans-serif"
+        fontWeight="bold"
+        fontSize="10"
+        fill="white"
+        letterSpacing="1"
+      >
         AMERICAN
       </text>
-      <text x="8" y="26" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="10" fill="white" letterSpacing="1">
+      <text
+        x="8"
+        y="26"
+        fontFamily="Arial, sans-serif"
+        fontWeight="bold"
+        fontSize="10"
+        fill="white"
+        letterSpacing="1"
+      >
         EXPRESS
       </text>
     </svg>
@@ -156,7 +215,7 @@ const Cards = () => {
             Debit Card
           </h1>
           <p className="text-sm text-slate-800 mt-0.5">
-            Manage your Well Trust debit card.
+            Manage your Pinecrest debit card.
           </p>
         </div>
 
@@ -209,7 +268,7 @@ const Cards = () => {
             {CardBrandLogos[card?.network || "visa"]}
           </div>
           <p className="text-slate-300 text-xs uppercase tracking-wide">
-            Well Trust Debit Card
+            Pinecrest Debit Card
           </p>
           <div className="flex items-center gap-2 mt-4">
             <p className="text-xl md:text-2xl font-semibold tracking-widest">

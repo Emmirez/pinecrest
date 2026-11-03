@@ -18,7 +18,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Headquarters",
-    detail: "Rue des Alpes 14, 1201 Geneva, Switzerland",
+    detail: "8601 South Dixie Hwy, Pinecrest, FL 33156",
   },
   {
     icon: Clock,

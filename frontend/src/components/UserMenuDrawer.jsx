@@ -198,7 +198,7 @@ const UserMenuDrawer = ({ open, onClose }) => {
             <p className="text-sm font-semibold text-navy-900 truncate">
               {user?.firstName} {user?.lastName}
             </p>
-            <p className="text-xs text-slate-400 truncate">Well Trust Member</p>
+            <p className="text-xs text-slate-400 truncate">Pinecrest Member</p>
           </div>
           <button
             onClick={() => go("/dashboard/profile")}

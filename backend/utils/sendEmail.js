@@ -57,7 +57,7 @@ const emailShell = (bodyHtml) => `
             <img src="${LOGO_URL}" alt="Pinecrest Bank" width="36" height="36" style="display:block; border-radius:8px;" />
           </td>
           <td style="vertical-align:middle; padding-left:10px;">
-            <span style="font-size:18px; font-weight:bold; color:#ffffff;">Well Trust</span>
+            <span style="font-size:18px; font-weight:bold; color:#ffffff;">Pinecrest</span>
             <span style="font-size:18px; font-weight:bold; color:${GOLD};"> Bank</span>
           </td>
         </tr>
@@ -73,7 +73,7 @@ const emailShell = (bodyHtml) => `
     <!-- Footer -->
     <div style="border-top:1px solid #e5e7eb; padding: 20px 28px; background:#f8fafc;">
       <p style="margin:0 0 4px 0; font-size:12px; font-weight:bold; color:${NAVY};">Pinecrest Bank</p>
-      <p style="margin:0 0 4px 0; font-size:11px; color:${SLATE};">Rue des Alpes 141201 Geneva Switzerland</p>
+      <p style="margin:0 0 4px 0; font-size:11px; color:${SLATE};">8601 South Dixie Hwy, Pinecrest, FL 33156</p>
       <p style="margin:0 0 12px 0; font-size:11px; color:${SLATE};">support@pinecrestbank.com &nbsp;·&nbsp; +1 (863) 333-9415</p>
       <p style="margin:0; font-size:10px; color:${SLATE}; line-height:1.5;">
         <p style="margin:16px 0 0 0; color:${SLATE}; font-size: 11px;">

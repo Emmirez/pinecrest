@@ -75,7 +75,7 @@ const features = [
   {
     icon: Zap,
     title: "Instant transfers",
-    desc: "Move money between Well Trust accounts in seconds, any time of day.",
+    desc: "Move money between Pinecrest accounts in seconds, any time of day.",
   },
   {
     icon: Bell,
@@ -239,7 +239,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="max-w-xl mb-12">
             <span className="text-xs font-semibold uppercase tracking-wide text-gold-400">
-              Why Well Trust
+              Why Pinecrest
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
               Everything a modern account needs
