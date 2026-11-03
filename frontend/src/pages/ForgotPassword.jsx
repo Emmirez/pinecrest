@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Mail, KeyRound, Lock, ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  Mail,
+  KeyRound,
+  Lock,
+  ArrowRight,
+  CheckCircle2,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import api from "../api/axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -13,6 +21,8 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
   const [loading, setLoading] = useState(false);
@@ -145,28 +155,46 @@ const ForgotPassword = () => {
                   size={17}
                   className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
                 />
-                <input
-                  type="password"
+                               <input
+                  type={showNewPassword ? "text" : "password"}
                   required
                   placeholder="New password (min. 8 characters)"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="input-field !pl-10"
+                  className="input-field !pl-10 !pr-10"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowNewPassword((v) => !v)}
+                  aria-label={showNewPassword ? "Hide password" : "Show password"}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-navy transition"
+                >
+                  {showNewPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                </button>
               </div>
               <div className="relative">
                 <Lock
                   size={17}
                   className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
                 />
-                <input
-                  type="password"
+                               <input
+                  type={showConfirmPassword ? "text" : "password"}
                   required
                   placeholder="Confirm new password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="input-field !pl-10"
+                  className="input-field !pl-10 !pr-10"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword((v) => !v)}
+                  aria-label={
+                    showConfirmPassword ? "Hide password" : "Show password"
+                  }
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-navy transition"
+                >
+                  {showConfirmPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+                </button>
               </div>
               <button
                 type="submit"

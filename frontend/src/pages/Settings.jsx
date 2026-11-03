@@ -1,8 +1,30 @@
 import { useEffect, useState } from "react";
-import { Lock, KeyRound, ShieldCheck, Save, QrCode, CheckCircle2, XCircle } from "lucide-react";
+import { Lock, KeyRound, ShieldCheck, Save, QrCode, CheckCircle2, XCircle, Eye, EyeOff } from "lucide-react";
 import api from "../api/axios";
 import TopBar from "../components/TopBar";
 import { useUserMenu } from "../components/DashboardLayout";
+
+// Password/PIN input with a show/hide eye toggle
+const PasswordInput = ({ className = "", ...props }) => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <div className="relative">
+      <input
+        {...props}
+        type={visible ? "text" : "password"}
+        className={`${className} !pr-10`}
+      />
+      <button
+        type="button"
+        onClick={() => setVisible((v) => !v)}
+        aria-label={visible ? "Hide" : "Show"}
+        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-navy transition"
+      >
+        {visible ? <EyeOff size={17} /> : <Eye size={17} />}
+      </button>
+    </div>
+  );
+};
 
 const Settings = () => {
   const { onMenuClick } = useUserMenu();
@@ -132,24 +154,21 @@ const Settings = () => {
           <h3 className="font-semibold text-navy-900 flex items-center gap-2"><Lock size={17} /> Change Password</h3>
           {pwError && <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">{pwError}</div>}
           {pwSuccess && <div className="bg-emerald-50 text-emerald-600 text-sm rounded-xl px-4 py-3">{pwSuccess}</div>}
-          <input
-            type="password"
+           <PasswordInput
             required
             placeholder="Current password"
             value={pwForm.currentPassword}
             onChange={(e) => setPwForm((f) => ({ ...f, currentPassword: e.target.value }))}
             className="input-field"
           />
-          <input
-            type="password"
+          <PasswordInput
             required
             placeholder="New password (min. 8 characters)"
             value={pwForm.newPassword}
             onChange={(e) => setPwForm((f) => ({ ...f, newPassword: e.target.value }))}
             className="input-field"
           />
-          <input
-            type="password"
+          <PasswordInput
             required
             placeholder="Confirm new password"
             value={pwForm.confirmPassword}
@@ -166,16 +185,14 @@ const Settings = () => {
           <h3 className="font-semibold text-navy-900 flex items-center gap-2"><KeyRound size={17} /> Change Transaction PIN</h3>
           {pinError && <div className="bg-red-50 text-red-600 text-sm rounded-xl px-4 py-3">{pinError}</div>}
           {pinSuccess && <div className="bg-emerald-50 text-emerald-600 text-sm rounded-xl px-4 py-3">{pinSuccess}</div>}
-          <input
-            type="password"
+          <PasswordInput
             required
             placeholder="Current account password"
             value={pinForm.currentPassword}
             onChange={(e) => setPinForm((f) => ({ ...f, currentPassword: e.target.value }))}
             className="input-field"
           />
-          <input
-            type="password"
+          <PasswordInput
             required
             inputMode="numeric"
             maxLength={4}
@@ -184,8 +201,7 @@ const Settings = () => {
             onChange={(e) => setPinForm((f) => ({ ...f, newPin: e.target.value.replace(/\D/g, "").slice(0, 4) }))}
             className="input-field tracking-widest"
           />
-          <input
-            type="password"
+          <PasswordInput
             required
             inputMode="numeric"
             maxLength={4}
@@ -214,8 +230,7 @@ const Settings = () => {
           {twoFactorEnabled ? (
             <form onSubmit={disableTwoFactor} className="space-y-3">
               <p className="text-sm text-slate-500">Enter your password to turn off two-factor authentication.</p>
-              <input
-                type="password"
+                <PasswordInput
                 required
                 placeholder="Current password"
                 value={disablePassword}

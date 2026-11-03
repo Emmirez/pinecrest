@@ -43,7 +43,7 @@ const points = [
   {
     icon: Fingerprint,
     title: "Verified Identity",
-    desc: "Email and phone verification required before any account goes active.",
+    desc: "Email verification and identity review required before any account goes active.",
   },
 ];
 
