@@ -29,8 +29,8 @@ const TopBar = ({
             onError={(e) => (e.target.style.display = "none")}
           />
           <span className="font-display font-bold text-base tracking-tight leading-none hidden sm:inline">
-            <span className="text-navy-900">Well</span>{" "}
-            <span className="text-gold-600">Trust Bank</span>
+            <span className="text-navy-900">Pinecrest</span>{" "}
+            <span className="text-gold-600">Bank</span>
           </span>
         </Link>
       </div>
