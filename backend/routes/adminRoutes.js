@@ -11,6 +11,7 @@ import {
   adjustBalance,
   getAllTransactions,
   updateTransaction,
+  deleteTransaction,
   getAuditLogs,
   getKycSubmissions,
   approveKyc,
@@ -65,6 +66,7 @@ router.put("/users/:id/limits", updateUserLimits);
 router.post("/users/:id/adjust", adjustBalance);
 router.get("/transactions", getAllTransactions);
 router.put("/transactions/:id", updateTransaction);
+router.delete("/transactions/:id", deleteTransaction);
 router.get("/audit-logs", getAuditLogs);
 router.get("/kyc", getKycSubmissions);
 router.put("/kyc/:id/approve", approveKyc);

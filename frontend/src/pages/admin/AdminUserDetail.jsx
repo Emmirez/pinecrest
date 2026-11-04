@@ -9,10 +9,12 @@ import {
   Wallet,
   Gauge,
   Pencil,
+  Trash2,
 } from "lucide-react";
 import api from "../../api/axios";
 import TopBar from "../../components/TopBar";
 import AdminTransactionEditModal from "../../components/AdminTransactionEditModal";
+import AdminTransactionDeleteModal from "../../components/AdminTransactionDeleteModal";
 import { useAdminMenu } from "../../components/AdminLayout";
 
 const AdminUserDetail = () => {
@@ -31,6 +33,7 @@ const AdminUserDetail = () => {
     perTransactionLimit: "",
   });
   const [editingTx, setEditingTx] = useState(null);
+  const [deletingTx, setDeletingTx] = useState(null);
   const { onMenuClick } = useAdminMenu();
 
   const load = () => {
@@ -328,6 +331,12 @@ const AdminUserDetail = () => {
                     >
                       <Pencil size={15} />
                     </button>
+                    <button
+                      onClick={() => setDeletingTx(tx)}
+                      className="text-slate-400 hover:text-red-500 transition"
+                    >
+                      <Trash2 size={15} />
+                    </button>
                   </div>
                 </div>
               ))}
@@ -336,12 +345,26 @@ const AdminUserDetail = () => {
         </div>
       </div>
 
-      {editingTx && (
+          {editingTx && (
         <AdminTransactionEditModal
           transaction={editingTx}
+          contextUserId={id}
           onClose={() => setEditingTx(null)}
           onSaved={() => {
             setEditingTx(null);
+            setMessage("Transaction updated");
+            load();
+          }}
+        />
+      )}
+
+      {deletingTx && (
+        <AdminTransactionDeleteModal
+          transaction={deletingTx}
+          onClose={() => setDeletingTx(null)}
+          onDeleted={(msg) => {
+            setDeletingTx(null);
+            setMessage(msg);
             load();
           }}
         />
