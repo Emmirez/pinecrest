@@ -118,8 +118,8 @@ const AboutUs = () => {
           delivering a seamless digital experience. But we've never lost sight
           of the human element. Behind every account, every transaction, and
           every support request is a team of dedicated professionals who
-          genuinely care about your financial well-being. When you call Well
-          Trust Bank, you'll reach a real person who can listen, understand, and
+          genuinely care about your financial well-being. When you call Pinecrest
+          Bank, you'll reach a real person who can listen, understand, and
           take action. No endless phone trees. No automated responses that don't
           address your concern. Just real, helpful conversations with people who
           are empowered to make things right.

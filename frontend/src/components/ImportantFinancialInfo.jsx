@@ -51,7 +51,7 @@ const ImportantFinancialInfo = () => {
         </h2>
         <p className="text-slate-500 mt-3 leading-relaxed">
           The agreements and disclosures that apply the moment you open a Well
-          Trust Bank account — worth a read before you sign up.
+          Pinecrest Bank account — worth a read before you sign up.
         </p>
 
         <div className="mt-8 space-y-5">
