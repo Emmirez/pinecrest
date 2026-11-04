@@ -256,6 +256,73 @@ export const adjustBalance = async (req, res) => {
   }
 };
 
+const formatAddress = (a) =>
+  a
+    ? [a.street, a.city, [a.state, a.zip].filter(Boolean).join(" "), a.country]
+        .filter(Boolean)
+        .join(", ")
+    : "none";
+
+// @route PUT /api/admin/users/:id/address
+// body: { street, city, state?, zip?, country }
+export const updateUserAddress = async (req, res) => {
+  try {
+    const { street, city, state, zip, country } = req.body;
+
+    if (!street?.trim() || !city?.trim() || !country) {
+      return res
+        .status(400)
+        .json({ message: "Street, city and country are required" });
+    }
+    if (
+      ["United States", "Canada"].includes(country) &&
+      (!state?.trim() || !zip?.trim())
+    ) {
+      return res.status(400).json({
+        message:
+          country === "Canada"
+            ? "Province and postal code are required"
+            : "State and ZIP code are required",
+      });
+    }
+
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const oldAddress = formatAddress(user.address);
+
+    user.address = {
+      street: street.trim(),
+      city: city.trim(),
+      state: state?.trim() || undefined,
+      zip: zip?.trim() || undefined,
+      country,
+    };
+    await user.save();
+
+    await AuditLog.create({
+      admin: req.user._id,
+      action: "update_address",
+      targetUser: user._id,
+      details: `Address changed from "${oldAddress}" to "${formatAddress(user.address)}"`,
+    });
+
+    await notifyGeneral(user, {
+      title: "Address updated",
+      message:
+        "The address on your account was updated by our team. If you didn't request this change, contact support immediately.",
+      type: "account",
+      email: true,
+    });
+
+    return res.json({ message: "Address updated", user });
+  } catch (error) {
+    console.error("Update address error:", error);
+    return res.status(500).json({ message: "Could not update address" });
+  }
+};
+
+
 // @route PUT /api/admin/users/:id/limits
 export const updateUserLimits = async (req, res) => {
   try {

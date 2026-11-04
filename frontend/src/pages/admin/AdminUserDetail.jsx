@@ -10,11 +10,13 @@ import {
   Gauge,
   Pencil,
   Trash2,
+  MapPin,
 } from "lucide-react";
 import api from "../../api/axios";
 import TopBar from "../../components/TopBar";
 import AdminTransactionEditModal from "../../components/AdminTransactionEditModal";
 import AdminTransactionDeleteModal from "../../components/AdminTransactionDeleteModal";
+import AdminEditAddressModal from "../../components/AdminEditAddressModal";
 import { useAdminMenu } from "../../components/AdminLayout";
 
 const AdminUserDetail = () => {
@@ -34,6 +36,7 @@ const AdminUserDetail = () => {
   });
   const [editingTx, setEditingTx] = useState(null);
   const [deletingTx, setDeletingTx] = useState(null);
+  const [editingAddress, setEditingAddress] = useState(false);
   const { onMenuClick } = useAdminMenu();
 
   const load = () => {
@@ -138,10 +141,32 @@ const AdminUserDetail = () => {
             <p className="font-semibold text-navy-900">
               {user.currency} {user.balance?.toFixed(2)}
             </p>
-            <p className="text-xs text-slate-400 mt-3 mb-1">Status</p>
+                      <p className="text-xs text-slate-400 mt-3 mb-1">Status</p>
             <p className="font-semibold text-navy-900 capitalize">
               {user.status}
             </p>
+            <p className="text-xs text-slate-400 mt-3 mb-1">Address</p>
+            <p className="font-semibold text-navy-900 text-sm leading-snug">
+              {user.address
+                ? [
+                    user.address.street,
+                    user.address.city,
+                    [user.address.state, user.address.zip]
+                      .filter(Boolean)
+                      .join(" "),
+                    user.address.country,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")
+                : "—"}
+            </p>
+            <button
+              type="button"
+              onClick={() => setEditingAddress(true)}
+              className="mt-3 w-full py-2 rounded-xl text-sm font-medium bg-slate-100 text-navy hover:bg-slate-200 transition flex items-center justify-center gap-1.5"
+            >
+              <MapPin size={15} /> Edit Address
+            </button>
           </div>
 
           <div className="card p-5">
@@ -353,6 +378,18 @@ const AdminUserDetail = () => {
           onSaved={() => {
             setEditingTx(null);
             setMessage("Transaction updated");
+            load();
+          }}
+        />
+      )}
+
+            {editingAddress && (
+        <AdminEditAddressModal
+          user={user}
+          onClose={() => setEditingAddress(false)}
+          onSaved={() => {
+            setEditingAddress(false);
+            setMessage("Address updated");
             load();
           }}
         />

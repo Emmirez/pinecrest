@@ -8,6 +8,7 @@ import {
   rejectUser,
   updateUserStatus,
   updateUserLimits,
+  updateUserAddress,
   adjustBalance,
   getAllTransactions,
   updateTransaction,
@@ -63,6 +64,7 @@ router.put("/users/:id/approve", approveUser);
 router.put("/users/:id/reject", rejectUser);
 router.put("/users/:id/status", updateUserStatus);
 router.put("/users/:id/limits", updateUserLimits);
+router.put("/users/:id/address", updateUserAddress);
 router.post("/users/:id/adjust", adjustBalance);
 router.get("/transactions", getAllTransactions);
 router.put("/transactions/:id", updateTransaction);
