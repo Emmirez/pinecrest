@@ -15,6 +15,7 @@ import api from "../api/axios";
 import TopBar from "../components/TopBar";
 import CustomSelect from "../components/CustomSelect";
 import TransferReceipt from "../components/TransferReceipt";
+import TransferVerificationModal from "../components/TransferVerificationModal";
 import { useUserMenu } from "../components/DashboardLayout";
 
 const countries = [
@@ -66,9 +67,55 @@ const Transfer = () => {
     description: "",
     pin: "",
   });
-  const [error, setError] = useState("");
+    const [error, setError] = useState("");
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [pendingVerification, setPendingVerification] = useState(null);
+
+  const emptyForm = {
+    receiverAccountNumber: "",
+    bankName: "",
+    accountName: "",
+    accountNumber: "",
+    routingNumber: "",
+    country: "",
+    swiftCode: "",
+    iban: "",
+    bankAddress: "",
+    identifier: "",
+    amount: "",
+    description: "",
+    pin: "",
+  };
+
+  // Either shows the next verification step, or — if the transfer is fully
+  // done — sets the success receipt and clears the form, same as before.
+  const handleTransferResponse = (data, recipientLabelFn) => {
+    if (data.needsVerification) {
+      setPendingVerification({
+        pendingTransferId: data.pendingTransferId,
+        step: data.step,
+        stepNumber: data.stepNumber,
+        totalSteps: data.totalSteps,
+        recipientLabelFn,
+      });
+      return;
+    }
+    setSuccess({ ...data.transaction, recipientLabel: recipientLabelFn(data.transaction) });
+    setForm(emptyForm);
+  };
+
+  const onVerificationComplete = (transaction) => {
+    const recipientLabel = pendingVerification.recipientLabelFn(transaction);
+    setSuccess({ ...transaction, recipientLabel });
+    setPendingVerification(null);
+    setForm(emptyForm);
+  };
+
+  const onVerificationCancel = (message) => {
+    setPendingVerification(null);
+    if (message) setError(message);
+  };
 
   const update = (field, value) => setForm((f) => ({ ...f, [field]: value }));
 
@@ -100,10 +147,7 @@ const Transfer = () => {
           pin: form.pin,
           description: form.description,
         });
-        setSuccess({
-          ...data.transaction,
-          recipientLabel: buildRecipientLabel(data.transaction),
-        });
+        handleTransferResponse(data, (tx) => buildRecipientLabel(tx));
       } else if (mode === "external") {
         const { data } = await api.post("/transactions/transfer/external", {
           bankName: form.bankName,
@@ -114,10 +158,7 @@ const Transfer = () => {
           pin: form.pin,
           description: form.description,
         });
-        setSuccess({
-          ...data.transaction,
-          recipientLabel: buildRecipientLabel(),
-        });
+        handleTransferResponse(data, () => buildRecipientLabel());
       } else if (mode === "international") {
         const { data } = await api.post(
           "/transactions/transfer/international",
@@ -133,10 +174,7 @@ const Transfer = () => {
             description: form.description,
           },
         );
-        setSuccess({
-          ...data.transaction,
-          recipientLabel: buildRecipientLabel(),
-        });
+        handleTransferResponse(data, () => buildRecipientLabel());
       } else {
         const { data } = await api.post(`/transactions/transfer/${mode}`, {
           identifier: form.identifier,
@@ -144,26 +182,8 @@ const Transfer = () => {
           pin: form.pin,
           description: form.description,
         });
-        setSuccess({
-          ...data.transaction,
-          recipientLabel: buildRecipientLabel(),
-        });
+        handleTransferResponse(data, () => buildRecipientLabel());
       }
-      setForm({
-        receiverAccountNumber: "",
-        bankName: "",
-        accountName: "",
-        accountNumber: "",
-        routingNumber: "",
-        country: "",
-        swiftCode: "",
-        iban: "",
-        bankAddress: "",
-        identifier: "",
-        amount: "",
-        description: "",
-        pin: "",
-      });
     } catch (err) {
       setError(err.response?.data?.message || "Transfer failed");
     } finally {
@@ -451,6 +471,17 @@ const Transfer = () => {
           </form>
         )}
       </div>
+
+      {pendingVerification && (
+        <TransferVerificationModal
+          pendingTransferId={pendingVerification.pendingTransferId}
+          initialStep={pendingVerification.step}
+          initialStepNumber={pendingVerification.stepNumber}
+          initialTotalSteps={pendingVerification.totalSteps}
+          onComplete={onVerificationComplete}
+          onCancel={onVerificationCancel}
+        />
+      )}
     </div>
   );
 };

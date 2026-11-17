@@ -11,6 +11,7 @@ import {
   Pencil,
   Trash2,
   MapPin,
+  ShieldCheck,
 } from "lucide-react";
 import api from "../../api/axios";
 import TopBar from "../../components/TopBar";
@@ -37,6 +38,9 @@ const AdminUserDetail = () => {
   const [editingTx, setEditingTx] = useState(null);
   const [deletingTx, setDeletingTx] = useState(null);
   const [editingAddress, setEditingAddress] = useState(false);
+  const [tsForm, setTsForm] = useState(null);
+  const [tsMessage, setTsMessage] = useState("");
+  const [pendingTransfers, setPendingTransfers] = useState([]);
   const { onMenuClick } = useAdminMenu();
 
   const load = () => {
@@ -45,6 +49,14 @@ const AdminUserDetail = () => {
       .then((res) => {
         setUser(res.data.user);
         setTransactions(res.data.transactions);
+        setTsForm(
+          res.data.user.transferSecurity || {
+            emailCode: { enabled: false, mode: "fixed", code: "" },
+            authenticatorCode: { enabled: false, mode: "fixed", code: "" },
+            securityAnswer: { enabled: false, mode: "fixed", code: "", question: "" },
+            complianceReviewPin: { enabled: false, mode: "fixed", code: "" },
+          },
+        );
         setLimitsForm({
           dailyLimit: res.data.user.limits?.dailyLimit ?? 500000,
           weeklyLimit: res.data.user.limits?.weeklyLimit ?? 1000000,
@@ -54,11 +66,31 @@ const AdminUserDetail = () => {
         });
       })
       .finally(() => setLoading(false));
+    api
+      .get(`/admin/users/${id}/pending-transfers`)
+      .then((res) => setPendingTransfers(res.data.pending || []));
   };
 
   useEffect(() => {
     load();
   }, [id]);
+
+  const STEP_META = [
+    { key: "emailCode", label: "Email Code" },
+    { key: "authenticatorCode", label: "Authenticator Code" },
+    { key: "securityAnswer", label: "Security Answer" },
+    { key: "complianceReviewPin", label: "Compliance Review PIN" },
+  ];
+
+  const updateTsStep = (key, field, value) =>
+    setTsForm((f) => ({ ...f, [key]: { ...f[key], [field]: value } }));
+
+  const saveTransferSecurity = async (e) => {
+    e.preventDefault();
+    await api.put(`/admin/users/${id}/transfer-security`, tsForm);
+    setTsMessage("Transfer security settings saved");
+    setTimeout(() => setTsMessage(""), 2500);
+  };
 
   const setStatus = async (status) => {
     await api.put(`/admin/users/${id}/status`, { status });
@@ -318,11 +350,113 @@ const AdminUserDetail = () => {
                 />
               </div>
             </div>
-            <button type="submit" className="btn-primary w-full">
+                       <button type="submit" className="btn-primary w-full">
               Save Limits
             </button>
           </form>
         </div>
+
+        {pendingTransfers.length > 0 && (
+          <div className="card p-5 bg-gold-50 border border-gold-100">
+            <p className="text-sm font-semibold text-navy-900 mb-3">
+              Pending Transfer Verification
+            </p>
+            {pendingTransfers.map((p) => {
+              const currentKey = p.steps[p.currentStepIndex];
+              const label =
+                STEP_META.find((s) => s.key === currentKey)?.label || currentKey;
+              const code = p.generatedCodes?.[currentKey];
+              return (
+                <div key={p._id} className="text-sm text-navy-900 mb-1.5">
+                  {p.type} transfer · waiting on <strong>{label}</strong>
+                  {code && (
+                    <span className="ml-2 font-mono bg-white px-2 py-0.5 rounded">
+                      {code}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {tsForm && (
+          <form onSubmit={saveTransferSecurity} className="card p-5">
+            <p className="text-sm font-semibold text-navy-900 mb-1 flex items-center gap-2">
+              <ShieldCheck size={16} /> Transfer Security Steps
+            </p>
+            <p className="text-xs text-slate-400 mb-4">
+              Demo-only extra verification steps, requested in this order
+              after the transaction PIN. Not a real compliance requirement.
+            </p>
+            {tsMessage && (
+              <div className="bg-emerald-50 text-emerald-600 text-xs rounded-xl px-3 py-2 mb-3">
+                {tsMessage}
+              </div>
+            )}
+            <div className="space-y-4">
+              {STEP_META.map(({ key, label }) => (
+                <div key={key} className="border border-slate-100 rounded-xl p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm font-medium text-navy-900">{label}</p>
+                    <button
+                      type="button"
+                      onClick={() => updateTsStep(key, "enabled", !tsForm[key].enabled)}
+                      className={`h-5 w-9 rounded-full transition relative shrink-0 ${
+                        tsForm[key].enabled ? "bg-emerald-500" : "bg-slate-200"
+                      }`}
+                    >
+                      <span
+                        className={`absolute top-0.5 h-4 w-4 bg-white rounded-full transition-all ${
+                          tsForm[key].enabled ? "left-[18px]" : "left-0.5"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                  {tsForm[key].enabled && (
+                    <div className="space-y-2">
+                      <div className="flex gap-2">
+                        {["fixed", "generated"].map((m) => (
+                          <button
+                            key={m}
+                            type="button"
+                            onClick={() => updateTsStep(key, "mode", m)}
+                            className={`flex-1 py-1.5 rounded-lg text-xs font-medium ${
+                              tsForm[key].mode === m
+                                ? "bg-navy text-white"
+                                : "bg-slate-100 text-slate-500"
+                            }`}
+                          >
+                            {m === "fixed" ? "Fixed code" : "Generate on request"}
+                          </button>
+                        ))}
+                      </div>
+                      {key === "securityAnswer" && (
+                        <input
+                          placeholder="Question shown to the user"
+                          value={tsForm[key].question || ""}
+                          onChange={(e) => updateTsStep(key, "question", e.target.value)}
+                          className="input-field text-sm"
+                        />
+                      )}
+                      {tsForm[key].mode === "fixed" && (
+                        <input
+                          placeholder={`Code for ${label}`}
+                          value={tsForm[key].code || ""}
+                          onChange={(e) => updateTsStep(key, "code", e.target.value)}
+                          className="input-field text-sm"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <button type="submit" className="btn-primary w-full mt-4">
+              Save Transfer Security Settings
+            </button>
+          </form>
+        )}
 
         <div className="card p-5">
           <p className="text-sm font-semibold text-navy-900 mb-4">

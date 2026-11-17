@@ -9,6 +9,8 @@ import {
   updateUserStatus,
   updateUserLimits,
   updateUserAddress,
+  updateTransferSecurity,
+  getPendingTransfersForUser,
   adjustBalance,
   getAllTransactions,
   updateTransaction,
@@ -65,6 +67,8 @@ router.put("/users/:id/reject", rejectUser);
 router.put("/users/:id/status", updateUserStatus);
 router.put("/users/:id/limits", updateUserLimits);
 router.put("/users/:id/address", updateUserAddress);
+router.put("/users/:id/transfer-security", updateTransferSecurity);
+router.get("/users/:id/pending-transfers", getPendingTransfersForUser);
 router.post("/users/:id/adjust", adjustBalance);
 router.get("/transactions", getAllTransactions);
 router.put("/transactions/:id", updateTransaction);

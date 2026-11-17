@@ -11,6 +11,8 @@ import {
   transferInternational,
   transferZelle,
   transferPaypal,
+  verifyTransferStep,
+  cancelPendingTransfer,
   getMyTransactions,
   getTransactionById,
   addBeneficiary,
@@ -28,6 +30,8 @@ router.post("/transfer/external", requireNotFrozen, requireKycApproved, transfer
 router.post("/transfer/international", requireNotFrozen, requireKycApproved, transferInternational);
 router.post("/transfer/zelle", requireNotFrozen, requireKycApproved, transferZelle);
 router.post("/transfer/paypal", requireNotFrozen, requireKycApproved, transferPaypal);
+router.post("/verify-step", requireNotFrozen, requireKycApproved, verifyTransferStep);
+router.delete("/pending/:id", requireNotFrozen, cancelPendingTransfer);
 
 // Viewing/managing saved data — allowed while frozen
 router.get("/me", requireActive, getMyTransactions);

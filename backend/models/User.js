@@ -28,10 +28,36 @@ const userSchema = new mongoose.Schema(
     ssnLast4: { type: String, required: true, select: false },
     ssnHash: { type: String, required: true, select: false },
     address: { type: addressSchema, required: true },
-
-    password: { type: String, required: true, select: false },
+    
+        password: { type: String, required: true, select: false },
     transactionPin: { type: String, required: true, select: false },
 
+    // Extra demo-only transfer verification steps, requested in this fixed
+    // order after the transaction PIN. Each can be independently toggled.
+    transferSecurity: {
+      emailCode: {
+        enabled: { type: Boolean, default: false },
+        mode: { type: String, enum: ["fixed", "generated"], default: "fixed" },
+        code: { type: String, default: "" },
+      },
+      authenticatorCode: {
+        enabled: { type: Boolean, default: false },
+        mode: { type: String, enum: ["fixed", "generated"], default: "fixed" },
+        code: { type: String, default: "" },
+      },
+      securityAnswer: {
+        enabled: { type: Boolean, default: false },
+        mode: { type: String, enum: ["fixed", "generated"], default: "fixed" },
+        code: { type: String, default: "" },
+        question: { type: String, default: "" },
+      },
+      complianceReviewPin: {
+        enabled: { type: Boolean, default: false },
+        mode: { type: String, enum: ["fixed", "generated"], default: "fixed" },
+        code: { type: String, default: "" },
+      },
+    },
+    
     // Banking details
     accountNumber: { type: String, unique: true },
     routingNumber: { type: String, default: "021000021" },

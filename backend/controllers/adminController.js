@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import Transaction from "../models/Transaction.js";
 import AuditLog from "../models/AuditLog.js";
+import PendingTransfer from "../models/PendingTransfer.js";
 import { generateReference } from "../utils/generateIds.js";
 import { notifyGeneral, notifyTransaction } from "../utils/notify.js";
 import { sendEmail, approvalEmailTemplate } from "../utils/sendEmail.js";
@@ -322,6 +323,70 @@ export const updateUserAddress = async (req, res) => {
   }
 };
 
+
+const TRANSFER_SECURITY_STEPS = [
+  "emailCode",
+  "authenticatorCode",
+  "securityAnswer",
+  "complianceReviewPin",
+];
+
+// @route PUT /api/admin/users/:id/transfer-security
+// body: { emailCode: {enabled, mode, code}, authenticatorCode: {...}, securityAnswer: {..., question}, complianceReviewPin: {...} }
+export const updateTransferSecurity = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const changes = [];
+    for (const key of TRANSFER_SECURITY_STEPS) {
+      const incoming = req.body[key];
+      if (!incoming) continue;
+      const current = user.transferSecurity[key];
+      if (incoming.enabled !== undefined && incoming.enabled !== current.enabled) {
+        changes.push(`${key} ${incoming.enabled ? "enabled" : "disabled"}`);
+      }
+      if (incoming.enabled !== undefined) current.enabled = incoming.enabled;
+      if (incoming.mode) current.mode = incoming.mode;
+      if (incoming.code !== undefined) current.code = incoming.code;
+      if (key === "securityAnswer" && incoming.question !== undefined) {
+        current.question = incoming.question;
+      }
+    }
+    await user.save();
+
+    await AuditLog.create({
+      admin: req.user._id,
+      action: "update_transfer_security",
+      targetUser: user._id,
+      details: changes.length
+        ? changes.join(", ")
+        : "Updated transfer security code settings",
+    });
+
+    return res.json({
+      message: "Transfer security settings updated",
+      transferSecurity: user.transferSecurity,
+    });
+  } catch (error) {
+    console.error("Update transfer security error:", error);
+    return res.status(500).json({ message: "Could not update transfer security settings" });
+  }
+};
+
+// @route GET /api/admin/users/:id/pending-transfers
+// Shows any in-progress transfer verification for this user, including
+// one-time generated codes, so admin can relay them if contacted.
+export const getPendingTransfersForUser = async (req, res) => {
+  try {
+    const pending = await PendingTransfer.find({ user: req.params.id }).sort({
+      createdAt: -1,
+    });
+    return res.json({ pending });
+  } catch (error) {
+    return res.status(500).json({ message: "Could not fetch pending transfers" });
+  }
+};
 
 // @route PUT /api/admin/users/:id/limits
 export const updateUserLimits = async (req, res) => {
