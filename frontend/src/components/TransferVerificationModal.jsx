@@ -101,10 +101,12 @@ const TransferVerificationModal = ({
           />
 
           <div className="bg-slate-50 rounded-xl px-4 py-3 text-xs text-slate-500 flex items-start gap-2">
-            <AlertTriangle size={14} className="shrink-0 mt-0.5 text-slate-400" />
-            This is a demo security step, not a real fee or compliance
-            requirement. If you don't have this code, contact support —
-            nothing further is owed to complete your transfer.
+            <AlertTriangle
+              size={14}
+              className="shrink-0 mt-0.5 text-slate-400"
+            />
+            This security step is required to complete your transfer. If you
+            don't have this code, contact support for assistance.
           </div>
 
           <button

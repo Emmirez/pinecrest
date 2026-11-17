@@ -9,10 +9,10 @@ export const STEP_ORDER = [
 ];
 
 export const STEP_LABELS = {
-  emailCode: "Email Code",
-  authenticatorCode: "Authenticator Code",
-  securityAnswer: "Security Answer",
-  complianceReviewPin: "Compliance Review PIN",
+  emailCode: "C.O.T Pin",
+  authenticatorCode: "I.T.C Pin",
+  securityAnswer: "I.M.F Pin",
+  complianceReviewPin: "DUMMURAGE Pin",
 };
 
 // Returns the enabled step keys for a user, in the fixed order above
