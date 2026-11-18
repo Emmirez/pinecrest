@@ -16,6 +16,7 @@ import TopBar from "../components/TopBar";
 import CustomSelect from "../components/CustomSelect";
 import TransferReceipt from "../components/TransferReceipt";
 import TransferVerificationModal from "../components/TransferVerificationModal";
+import { minDelay } from "../utils/minDelay";
 import { useUserMenu } from "../components/DashboardLayout";
 import Spinner from "../components/Spinner";
 
@@ -142,15 +143,15 @@ const Transfer = () => {
     setLoading(true);
     try {
       if (mode === "internal") {
-        const { data } = await api.post("/transactions/transfer/internal", {
+          const { data } = await minDelay(api.post("/transactions/transfer/internal", {
           receiverAccountNumber: form.receiverAccountNumber,
           amount: parseFloat(form.amount),
           pin: form.pin,
           description: form.description,
-        });
+        }));
         handleTransferResponse(data, (tx) => buildRecipientLabel(tx));
       } else if (mode === "external") {
-        const { data } = await api.post("/transactions/transfer/external", {
+                const { data } = await minDelay(api.post("/transactions/transfer/external", {
           bankName: form.bankName,
           accountName: form.accountName,
           accountNumber: form.accountNumber,
@@ -158,10 +159,10 @@ const Transfer = () => {
           amount: parseFloat(form.amount),
           pin: form.pin,
           description: form.description,
-        });
+        }));
         handleTransferResponse(data, () => buildRecipientLabel());
       } else if (mode === "international") {
-        const { data } = await api.post(
+        const { data } = await minDelay(api.post(
           "/transactions/transfer/international",
           {
             country: form.country,
@@ -174,15 +175,15 @@ const Transfer = () => {
             pin: form.pin,
             description: form.description,
           },
-        );
+        ));
         handleTransferResponse(data, () => buildRecipientLabel());
       } else {
-        const { data } = await api.post(`/transactions/transfer/${mode}`, {
+                const { data } = await minDelay(api.post(`/transactions/transfer/${mode}`, {
           identifier: form.identifier,
           amount: parseFloat(form.amount),
           pin: form.pin,
           description: form.description,
-        });
+        }));
         handleTransferResponse(data, () => buildRecipientLabel());
       }
     } catch (err) {

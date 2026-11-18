@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X, ShieldCheck, AlertTriangle } from "lucide-react";
 import api from "../api/axios";
+import { minDelay } from "../utils/minDelay";
 import Spinner from "./Spinner";
 
 const TransferVerificationModal = ({
@@ -24,10 +25,10 @@ const TransferVerificationModal = ({
     setError("");
     setLoading(true);
     try {
-      const { data } = await api.post("/transactions/verify-step", {
+          const { data } = await minDelay(api.post("/transactions/verify-step", {
         pendingTransferId,
         code,
-      });
+      }));  
       setCode("");
       if (data.needsVerification) {
         setStep(data.step);
