@@ -17,6 +17,7 @@ import CustomSelect from "../components/CustomSelect";
 import TransferReceipt from "../components/TransferReceipt";
 import TransferVerificationModal from "../components/TransferVerificationModal";
 import { useUserMenu } from "../components/DashboardLayout";
+import Spinner from "../components/Spinner";
 
 const countries = [
   "United Kingdom",
@@ -460,13 +461,17 @@ const Transfer = () => {
               />
             </div>
 
-            <button
+                       <button
               type="submit"
               disabled={loading}
               className="btn-primary w-full flex items-center justify-center gap-2"
             >
-              {loading ? "Processing..." : "Send Money"}{" "}
-              <ArrowRight size={16} />
+              {loading && <Spinner />}
+              {loading ? "Processing..." : (
+                <>
+                  Send Money <ArrowRight size={16} />
+                </>
+              )}
             </button>
           </form>
         )}

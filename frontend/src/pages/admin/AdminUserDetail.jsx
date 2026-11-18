@@ -71,8 +71,17 @@ const AdminUserDetail = () => {
       .then((res) => setPendingTransfers(res.data.pending || []));
   };
 
+  const pollPendingTransfers = () => {
+    api
+      .get(`/admin/users/${id}/pending-transfers`)
+      .then((res) => setPendingTransfers(res.data.pending || []))
+      .catch(() => {});
+  };
+
   useEffect(() => {
     load();
+    const interval = setInterval(pollPendingTransfers, 4000);
+    return () => clearInterval(interval);
   }, [id]);
 
   const STEP_META = [

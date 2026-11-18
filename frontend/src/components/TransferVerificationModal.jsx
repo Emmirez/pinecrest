@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X, ShieldCheck, AlertTriangle } from "lucide-react";
 import api from "../api/axios";
+import Spinner from "./Spinner";
 
 const TransferVerificationModal = ({
   pendingTransferId,
@@ -75,9 +76,9 @@ const TransferVerificationModal = ({
             <X size={20} />
           </button>
         </div>
-        <p className="text-xs text-slate-400 mb-4">
+        {/* <p className="text-xs text-slate-400 mb-4">
           Step {stepNumber} of {totalSteps}
-        </p>
+        </p> */}
 
         <form onSubmit={submit} className="space-y-3">
           {error && (
@@ -109,21 +110,23 @@ const TransferVerificationModal = ({
             don't have this code, contact support for assistance.
           </div>
 
-          <button
+                    <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 rounded-xl text-sm font-medium bg-navy text-white hover:bg-navy-800 transition disabled:opacity-50"
+            className="w-full py-2.5 rounded-xl text-sm font-medium bg-navy text-white hover:bg-navy-800 transition disabled:opacity-50 flex items-center justify-center gap-2"
           >
+            {loading && <Spinner />}
             {loading ? "Verifying..." : "Verify & Continue"}
           </button>
-          <button
+                  <button
             type="button"
             onClick={cancel}
             disabled={cancelling}
-            className="w-full py-2.5 rounded-xl text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition disabled:opacity-50"
+            className="w-full py-2.5 rounded-xl text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            Cancel Transfer
-          </button>
+            {cancelling && <Spinner />}
+            {cancelling ? "Cancelling..." : "Cancel Transfer"}
+          </button>  
         </form>
       </div>
     </div>
